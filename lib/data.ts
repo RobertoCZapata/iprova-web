@@ -287,6 +287,11 @@ export const teamMembers: TeamMember[] = [
     role: "Abogada",
     image: "/images/team/maria-fernanda.jpg",
   },
+  {
+    name: "Hernan Dario Zapata",
+    role: "Abogado Comercial",
+    image: "/images/team/hernan-dario.jpg",
+  },
 ];
 
 // Team Section Content
