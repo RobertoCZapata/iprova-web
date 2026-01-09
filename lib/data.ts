@@ -23,6 +23,11 @@ import {
   HeartHandshake,
   Handshake,
   Award,
+  TrendingUp,
+  Briefcase,
+  CheckCircle2,
+  Users,
+  Calendar,
   type LucideIcon,
 } from "lucide-react";
 
@@ -39,6 +44,47 @@ export const navItems = [
   { label: "Servicios", href: "#servicios" },
   { label: "Equipo", href: "#equipo" },
   { label: "Contacto", href: "#contacto" },
+] as const;
+
+// Statistics / Success Metrics
+export interface Statistic {
+  value: string;
+  label: string;
+  icon: LucideIcon;
+  suffix?: string; // Para porcentajes o símbolos
+}
+
+export const statistics: Statistic[] = [
+  {
+    value: "95",
+    label: "Porcentaje de Éxito",
+    icon: TrendingUp,
+    suffix: "%",
+  },
+  {
+    value: "500",
+    label: "Total de Casos",
+    icon: Briefcase,
+    suffix: "+",
+  },
+  {
+    value: "475",
+    label: "Casos Exitosos",
+    icon: CheckCircle2,
+    suffix: "+",
+  },
+  {
+    value: "98",
+    label: "Clientes Satisfechos",
+    icon: Users,
+    suffix: "%",
+  },
+  {
+    value: "20",
+    label: "Años de Experiencia",
+    icon: Calendar,
+    suffix: "+",
+  },
 ] as const;
 
 // Trust Values (Libertad, Defensa, Protección)
