@@ -37,6 +37,7 @@ export const navItems = [
   { label: "Inicio", href: "#inicio" },
   { label: "Nosotros", href: "#nosotros" },
   { label: "Servicios", href: "#servicios" },
+  { label: "Equipo", href: "#equipo" },
   { label: "Contacto", href: "#contacto" },
 ] as const;
 
@@ -215,6 +216,38 @@ export const aboutUsContent = {
   title: "Valores Corporativos",
   description:
     "La marca IPROVA trabaja incansablemente el proceso de construcción de su marca, para fortalecer la conexión con sus clientes y empleados, al mismo tiempo que impulsar su reconocimiento.",
+} as const;
+
+// Team Members
+export interface TeamMember {
+  name: string;
+  role: string;
+  image: string;
+}
+
+export const teamMembers: TeamMember[] = [
+  {
+    name: "Henry Zapata Reyes",
+    role: "Abogado Penalista",
+    image: "/images/team/henry-zapata.jpg",
+  },
+  {
+    name: "Javier Pedraza Lizarazo",
+    role: "Abogado Investigador",
+    image: "/images/team/javier-pedraza.jpg",
+  },
+  {
+    name: "Maria Fernanda Gonzalez",
+    role: "Abogada",
+    image: "/images/team/maria-fernanda.jpg",
+  },
+];
+
+// Team Section Content
+export const teamSectionContent = {
+  title: "Nuestro Equipo",
+  description:
+    "Profesionales comprometidos con la excelencia y la defensa de sus intereses.",
 } as const;
 
 // Footer Content

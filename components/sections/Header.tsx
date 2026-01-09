@@ -34,10 +34,10 @@ export function Header() {
                 <a
                   key={item.label}
                   href={item.href}
-                  className={`px-3 py-2 text-sm font-medium uppercase tracking-wide transition-colors ${
+                  className={`px-3 py-2 text-sm font-medium uppercase tracking-wide transition-all duration-200 rounded-sm ${
                     item.label === "Contacto"
-                      ? "bg-secondary text-white hover:bg-white hover:text-primary px-6 rounded-sm font-bold"
-                      : "text-white hover:text-secondary"
+                      ? "bg-secondary text-white hover:bg-white hover:text-primary px-6 font-bold"
+                      : "text-white hover:bg-secondary hover:text-white"
                   }`}
                 >
                   {item.label}
