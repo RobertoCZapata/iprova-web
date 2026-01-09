@@ -26,23 +26,23 @@ export function HeroSection() {
           {/* Text Content */}
           <div className="w-full lg:w-3/5 text-left">
             <div className="inline-block px-3 py-1 border border-secondary text-secondary text-xs font-bold tracking-widest uppercase mb-6 rounded-sm bg-primary/20 backdrop-blur-sm">
-              Legal &amp; Investigación Corporativa
+              Abogados e Investigadores
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight mb-6 drop-shadow-lg">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight mb-4 drop-shadow-lg">
               {heroContent.title.main}{" "}
               <span className="text-secondary">
                 {heroContent.title.highlight}
               </span>
             </h1>
-            <p className="mt-4 text-2xl text-white font-light border-l-4 border-secondary pl-6 italic drop-shadow-md">
-              "Superar lo hecho es ir más allá."
+            <p className="text-xl md:text-2xl text-secondary font-semibold mb-6 drop-shadow-md">
+              {heroContent.tagline}
             </p>
-            <p className="mt-6 text-gray-300 text-lg font-light max-w-2xl mb-6 drop-shadow-md">
+            <p className="mt-6 text-gray-100 text-lg md:text-xl font-medium max-w-2xl mb-4 drop-shadow-md leading-relaxed">
               {heroContent.description}
             </p>
-            {heroContent.extendedDescription && (
-              <p className="mt-4 text-gray-300 text-base font-light max-w-2xl mb-10 drop-shadow-md">
-                {heroContent.extendedDescription}
+            {heroContent.benefit && (
+              <p className="mt-4 text-gray-300 text-base font-light max-w-2xl mb-10 drop-shadow-md italic border-l-4 border-secondary pl-6">
+                {heroContent.benefit}
               </p>
             )}
             <div className="mt-10 flex flex-col sm:flex-row gap-4">

@@ -46,6 +46,41 @@ export const navItems = [
   { label: "Contacto", href: "#contacto" },
 ] as const;
 
+// Testimonials / Social Proof
+export interface Testimonial {
+  case: string;
+  result: string;
+  initials: string;
+  type: "penal" | "civil" | "corporativo" | "investigacion";
+}
+
+export const testimonials: Testimonial[] = [
+  {
+    case: "Caso de Derecho Penal",
+    result: "Absuelto",
+    initials: "J.M.",
+    type: "penal",
+  },
+  {
+    case: "Investigación Corporativa",
+    result: "Caso resuelto exitosamente",
+    initials: "C.F.",
+    type: "corporativo",
+  },
+  {
+    case: "Defensa de Lesiones",
+    result: "Indemnización obtenida",
+    initials: "A.R.",
+    type: "civil",
+  },
+  {
+    case: "Investigación Privada",
+    result: "Evidencia clave encontrada",
+    initials: "M.P.",
+    type: "investigacion",
+  },
+] as const;
+
 // Statistics / Success Metrics
 export interface Statistic {
   value: string;
@@ -115,6 +150,7 @@ export const trustValues: TrustValue[] = [
 // Services (del Manual de Marca)
 export interface Service {
   title: string;
+  subtitle?: string; // Beneficio directo (UX Writing)
   description: string;
   href: string;
   icon: LucideIcon;
@@ -123,43 +159,49 @@ export interface Service {
 export const services: Service[] = [
   {
     title: "Defensa Judicial",
+    subtitle: "Protegemos tu futuro tras un accidente",
     description:
-      "Representación experta en litigios y procesos judiciales, garantizando la defensa técnica de sus intereses. Nuestros servicios de Inteligencia Jurídica incluyen análisis estratégico de casos, preparación de defensas robustas y representación en todas las instancias judiciales. Combinamos experiencia legal con técnicas de Investigación Privada para construir defensas sólidas.",
+      "No solo te representamos en el juzgado. Investigamos a fondo tu caso, recopilamos evidencia que otros pasan por alto y construimos una defensa sólida. Representación experta en litigios y procesos judiciales, garantizando la defensa técnica de sus intereses.",
     href: "#servicios",
     icon: Scale,
   },
   {
     title: "Defensa de Lesiones",
+    subtitle: "Protegemos tu futuro tras un accidente",
     description:
-      "Acompañamiento especializado en casos de lesiones personales, buscando la reparación integral. Nuestro equipo de Inteligencia Jurídica trabaja en conjunto con expertos médicos y peritos para documentar adecuadamente las lesiones. La Investigación Privada complementa estos casos recopilando evidencia adicional que fortalece su posición legal.",
+      "Un accidente puede cambiar tu vida. Nosotros documentamos cada detalle, trabajamos con expertos médicos y peritos, y luchamos por la reparación integral que mereces. Acompañamiento especializado en casos de lesiones personales.",
     href: "#servicios",
     icon: Gavel,
   },
   {
     title: "Asesoría Jurídica",
+    subtitle: "Evita problemas antes de que ocurran",
     description:
-      "Consultoría legal preventiva y correctiva para personas naturales y empresas. Nuestros servicios de Inteligencia Jurídica incluyen análisis de contratos, evaluación de riesgos legales y estrategias preventivas. La Investigación Privada se integra para verificar antecedentes, validar información y proteger sus intereses antes de tomar decisiones importantes.",
+      "La mejor defensa es la prevención. Analizamos contratos, evaluamos riesgos y verificamos antecedentes antes de que tomes decisiones importantes. Consultoría legal preventiva y correctiva para personas naturales y empresas.",
     href: "#servicios",
     icon: School,
   },
   {
     title: "Investigación Judicial",
+    subtitle: "Recolectamos la evidencia que otros pasan por alto",
     description:
-      "Recolección de elementos materiales probatorios y evidencia física con rigor técnico. Nuestros servicios de Investigación Privada en el ámbito judicial incluyen recolección de evidencia, análisis forense y presentación de pruebas. La Inteligencia Jurídica guía cada investigación para asegurar que los hallazgos sean admisibles y efectivos en procesos legales.",
+      "No confiamos solo en lo que nos dicen. Investigamos, analizamos y presentamos pruebas sólidas. Recolección de elementos materiales probatorios y evidencia física con rigor técnico y metodología profesional.",
     href: "#servicios",
     icon: Search,
   },
   {
-    title: "Seguridad Laboral",
+    title: "Seguridad Corporativa",
+    subtitle: "Protege tu empresa antes de que sea tarde",
     description:
-      "Gestión de riesgos y cumplimiento normativo en seguridad y salud en el trabajo. Nuestros servicios de Inteligencia Jurídica incluyen asesoría en normativa laboral, prevención de riesgos y defensa en procesos administrativos. La Investigación Privada complementa estos servicios verificando antecedentes de personal y analizando riesgos corporativos.",
+      "Tu empresa es vulnerable si no conoces los riesgos. Investigamos antecedentes, analizamos amenazas y diseñamos estrategias de protección. Gestión de riesgos y cumplimiento normativo en seguridad y salud en el trabajo.",
     href: "#servicios",
     icon: Shield,
   },
   {
     title: "Contra-Interrogación",
+    subtitle: "Validamos testimonios con precisión forense",
     description:
-      "Técnicas avanzadas de litigación oral para la validación de testimonios. Nuestros servicios de Inteligencia Jurídica incluyen preparación de interrogatorios, análisis de testimonios y estrategias de litigación. La Investigación Privada se utiliza para verificar la veracidad de declaraciones y recopilar información adicional que fortalece su caso.",
+      "Cada palabra cuenta en un juicio. Preparamos interrogatorios estratégicos, verificamos la veracidad de declaraciones y exponemos inconsistencias. Técnicas avanzadas de litigación oral para la validación de testimonios.",
     href: "#servicios",
     icon: Mic,
   },
@@ -233,21 +275,26 @@ export const socialLinks = {
 
 // Hero Section Content
 export const heroContent = {
+  // Nuevo H1 directo al beneficio (UX Writing optimizado)
   title: {
-    main: "Inteligencia Jurídica e",
-    highlight: "Investigación Privada",
+    main: "No solo te defendemos,",
+    highlight: "encontramos la verdad",
   },
+  // Tagline diferenciador
+  tagline: "Abogados e Investigadores en un solo lugar",
+  // Descripción que elimina ansiedad del cliente
   description:
-    "Superar lo hecho es ir más allá. iPROVA es su firma especializada en Inteligencia Jurídica e Investigación Privada en Colombia. Con más de 20 años de experiencia, ofrecemos asesoría legal integral, investigación corporativa y defensa jurídica de alto nivel. Nuestro compromiso con la excelencia y la lealtad hacia nuestros clientes nos ha posicionado como líderes en servicios de Inteligencia Jurídica e Investigación Privada.",
-  extendedDescription:
-    "En iPROVA, combinamos la experiencia legal con técnicas avanzadas de Investigación Privada para brindar soluciones integrales. Nuestros servicios de Inteligencia Jurídica incluyen análisis estratégico, asesoría preventiva y defensa proactiva. La Investigación Privada que realizamos abarca desde casos corporativos hasta investigaciones personales, siempre con la máxima confidencialidad y profesionalismo.",
+    "No necesitas contratar abogados y peritos por separado. En iPROVA, combinamos defensa jurídica experta con investigación privada profesional. Control total de tu caso, desde el análisis hasta la resolución.",
+  // Beneficio emocional
+  benefit:
+    "Mientras otros solo defienden, nosotros investigamos, analizamos y construimos tu caso con evidencia sólida. Eso es ir más allá.",
   cta: {
     primary: {
-      label: "Contáctanos",
+      label: "Solicitar Evaluación de Caso",
       href: "#contacto",
     },
     secondary: {
-      label: "Saber más",
+      label: "Ver Nuestros Servicios",
       href: "#servicios",
     },
   },

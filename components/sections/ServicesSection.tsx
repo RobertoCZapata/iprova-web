@@ -28,10 +28,15 @@ export function ServicesSection() {
                 <div className="w-14 h-14 bg-primary/10 dark:bg-primary/30 rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary transition-colors duration-300">
                   <Icon className="text-primary dark:text-blue-300 text-3xl group-hover:text-white transition-colors duration-300" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                   {service.title}
                 </h3>
-                <p className="text-gray-500 dark:text-gray-400 text-sm">
+                {service.subtitle && (
+                  <p className="text-primary dark:text-blue-400 font-semibold text-sm mb-3">
+                    {service.subtitle}
+                  </p>
+                )}
+                <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
                   {service.description}
                 </p>
               </article>
