@@ -56,6 +56,38 @@ export default function WhatsAppWidget() {
 
   return (
     <div className="fixed bottom-4 right-4 z-40 flex flex-col items-end space-y-3 space-y-reverse md:bottom-6 md:right-6">
+      {/* Texto animado "¿En qué podemos ayudarte?" */}
+      <AnimatePresence>
+        {!isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            className="mb-3 mr-2 relative"
+          >
+            <motion.div
+              animate={{
+                y: [0, -8, 0],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="relative bg-primary text-white px-4 py-2.5 rounded-lg shadow-xl border border-white/10 backdrop-blur-sm"
+            >
+              <p className="text-xs font-medium whitespace-nowrap">
+                ¿En qué podemos ayudarte?
+              </p>
+              {/* Flecha apuntando al botón */}
+              <div className="absolute bottom-0 right-6 transform translate-y-full">
+                <div className="w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-transparent border-t-primary" />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Widget Panel */}
       <AnimatePresence>
         {isOpen && (
@@ -75,10 +107,10 @@ export default function WhatsAppWidget() {
                 </p>
                 <div className="mt-1 flex items-center space-x-2">
                   <span className="relative flex h-2 w-2">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary/60" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-secondary" />
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500/60" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
                   </span>
-                  <span className="text-[0.7rem] font-medium text-secondary uppercase tracking-wide">
+                  <span className="text-[0.7rem] font-medium text-green-500 uppercase tracking-wide">
                     En línea
                   </span>
                 </div>
@@ -159,11 +191,11 @@ export default function WhatsAppWidget() {
           )}
         </AnimatePresence>
 
-        {/* Pulse badge when closed - usando color secundario de la marca */}
+        {/* Pulse badge when closed - verde estándar de WhatsApp */}
         {!isOpen && (
           <span className="absolute -top-1 -right-1 flex h-4 w-4">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary/60" />
-            <span className="relative inline-flex h-4 w-4 rounded-full bg-secondary ring-2 ring-primary" />
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500/60" />
+            <span className="relative inline-flex h-4 w-4 rounded-full bg-green-500 ring-2 ring-primary" />
           </span>
         )}
       </button>
