@@ -23,8 +23,8 @@ import {
   HeartHandshake,
   Handshake,
   Award,
+  type LucideIcon,
 } from "lucide-react";
-import type { Icon } from "lucide-react";
 
 // Brand Assets
 export const brandAssets = {
@@ -44,7 +44,7 @@ export const navItems = [
 export interface TrustValue {
   title: string;
   description: string;
-  icon: Icon;
+  icon: LucideIcon;
 }
 
 export const trustValues: TrustValue[] = [
@@ -70,7 +70,7 @@ export interface Service {
   title: string;
   description: string;
   href: string;
-  icon: Icon;
+  icon: LucideIcon;
 }
 
 export const services: Service[] = [
@@ -122,7 +122,7 @@ export const services: Service[] = [
 export interface CorporateValue {
   title: string;
   description: string;
-  icon: Icon;
+  icon: LucideIcon;
 }
 
 export const corporateValues: CorporateValue[] = [
