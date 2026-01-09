@@ -11,6 +11,11 @@ export function ServicesSection() {
           <p className="mt-4 max-w-2xl text-xl text-gray-500 dark:text-gray-400 mx-auto">
             {servicesSectionContent.description}
           </p>
+          {servicesSectionContent.detailedDescription && (
+            <p className="mt-4 max-w-3xl text-base text-gray-600 dark:text-gray-300 mx-auto">
+              {servicesSectionContent.detailedDescription}
+            </p>
+          )}
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service) => {

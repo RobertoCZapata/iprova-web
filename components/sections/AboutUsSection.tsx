@@ -12,9 +12,14 @@ export function AboutUsSection() {
               {aboutUsContent.title}
             </h2>
             <div className="h-1 w-20 bg-secondary mb-6" />
-            <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
+            <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
               {aboutUsContent.description}
             </p>
+            {aboutUsContent.extendedDescription && (
+              <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
+                {aboutUsContent.extendedDescription}
+              </p>
+            )}
             <div className="relative h-64 w-full rounded-lg overflow-hidden shadow-lg mt-8">
               <Image
                 alt="Team handshake"

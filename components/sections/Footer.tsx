@@ -29,7 +29,7 @@ export function Footer() {
             <p className="text-gray-300 text-sm leading-relaxed mb-6">
               {footerContent.brand.description}
             </p>
-            <div className="flex space-x-4">
+            <div className="flex space-x-4 mb-6">
               <a
                 href={socialLinks.facebook}
                 className="text-gray-300 hover:text-white transition-colors"
@@ -44,6 +44,46 @@ export function Footer() {
               >
                 <Instagram className="h-6 w-6" />
               </a>
+            </div>
+            {/* Enlaces internos rápidos */}
+            <div className="space-y-2">
+              <h4 className="text-sm font-semibold uppercase tracking-wider text-gray-300 mb-2">
+                Navegación
+              </h4>
+              <ul className="space-y-1">
+                <li>
+                  <a
+                    href="#inicio"
+                    className="text-gray-300 text-sm hover:text-white transition-colors"
+                  >
+                    Inicio
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#nosotros"
+                    className="text-gray-300 text-sm hover:text-white transition-colors"
+                  >
+                    Nosotros
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#servicios"
+                    className="text-gray-300 text-sm hover:text-white transition-colors"
+                  >
+                    Servicios
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#equipo"
+                    className="text-gray-300 text-sm hover:text-white transition-colors"
+                  >
+                    Equipo
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
 

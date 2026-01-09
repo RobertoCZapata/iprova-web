@@ -37,9 +37,14 @@ export function HeroSection() {
             <p className="mt-4 text-2xl text-white font-light border-l-4 border-secondary pl-6 italic drop-shadow-md">
               "Superar lo hecho es ir más allá."
             </p>
-            <p className="mt-6 text-gray-300 text-lg font-light max-w-lg mb-10 drop-shadow-md">
+            <p className="mt-6 text-gray-300 text-lg font-light max-w-2xl mb-6 drop-shadow-md">
               {heroContent.description}
             </p>
+            {heroContent.extendedDescription && (
+              <p className="mt-4 text-gray-300 text-base font-light max-w-2xl mb-10 drop-shadow-md">
+                {heroContent.extendedDescription}
+              </p>
+            )}
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
               <Button
                 variant="primary"
