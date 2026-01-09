@@ -1,0 +1,407 @@
+# iPROVA - Cursor Rules & Development Guidelines
+
+## 🎯 Principios Fundamentales
+
+1. **Escalabilidad**: El código debe ser fácil de extender sin modificar componentes existentes
+2. **Mantenibilidad**: Todo el contenido editable debe estar centralizado en `lib/data.ts`
+3. **Clean Code**: Código legible, bien tipado y documentado
+4. **Consistencia**: Seguir siempre los mismos patrones y convenciones
+
+---
+
+## 📁 Estructura de Archivos
+
+### Organización de Componentes
+
+```
+components/
+├── sections/          # Componentes de secciones de página (Header, Hero, Footer, etc.)
+├── ui/                # Componentes UI reutilizables (Button, Card, etc.)
+└── features/          # Componentes específicos de features (TeamMember, ServiceCard, etc.)
+```
+
+**Reglas:**
+- Cada componente debe estar en su propio archivo
+- Nombres de archivos: PascalCase (ej: `HeroSection.tsx`)
+- Componentes de sección van en `sections/`
+- Componentes UI reutilizables van en `ui/`
+
+### Organización de Datos
+
+```
+lib/
+├── data.ts            # ⭐ ÚNICO lugar para contenido editable (textos, arrays, objetos)
+├── utils.ts           # Funciones utilitarias (cn, helpers, etc.)
+└── types.ts           # Tipos TypeScript compartidos (si es necesario)
+```
+
+**Regla CRÍTICA:** 
+- **NUNCA** hardcodear texto, arrays o datos en componentes
+- **SIEMPRE** usar `lib/data.ts` para cualquier contenido editable
+- Esto permite editar todo el contenido sin tocar componentes
+
+---
+
+## 🎨 Convenciones de Código
+
+### TypeScript
+
+- **SIEMPRE** usar TypeScript estricto
+- **SIEMPRE** tipar props de componentes con interfaces/types
+- **NUNCA** usar `any` - usar `unknown` si es necesario
+- Exportar tipos/interfaces cuando se reutilicen
+
+```typescript
+// ✅ CORRECTO
+interface ButtonProps {
+  variant?: "primary" | "outline-light" | "ghost";
+  children: ReactNode;
+}
+
+// ❌ INCORRECTO
+function Button(props: any) { ... }
+```
+
+### Componentes React
+
+- **SIEMPRE** usar `"use client"` solo cuando sea necesario (interactividad, hooks)
+- Componentes de servidor por defecto (Next.js 15 App Router)
+- **SIEMPRE** usar `export function ComponentName()` en lugar de `const ComponentName = ()`
+- Props deben ser tipadas con interfaces
+
+```typescript
+// ✅ CORRECTO
+export function Header() {
+  return <header>...</header>;
+}
+
+// ✅ CORRECTO (si necesita interactividad)
+"use client";
+export function InteractiveComponent() {
+  const [state, setState] = useState();
+  return <div>...</div>;
+}
+```
+
+### Naming Conventions
+
+- **Componentes**: PascalCase (`HeroSection`, `Button`, `TeamMember`)
+- **Archivos de componentes**: PascalCase (`HeroSection.tsx`)
+- **Funciones utilitarias**: camelCase (`cn`, `formatDate`)
+- **Constantes**: camelCase para objetos, UPPER_SNAKE_CASE solo para valores primitivos inmutables
+- **Props interfaces**: `ComponentNameProps` (ej: `ButtonProps`)
+
+### Imports
+
+- **SIEMPRE** usar path aliases (`@/components`, `@/lib`)
+- **SIEMPRE** agrupar imports:
+  1. React/Next.js
+  2. Librerías externas
+  3. Componentes internos
+  4. Utilidades
+  5. Tipos
+  6. Datos
+
+```typescript
+// ✅ CORRECTO
+import Image from "next/image";
+import { Scale, Eye } from "lucide-react";
+import { Button } from "@/components/ui/Button";
+import { cn } from "@/lib/utils";
+import type { Service } from "@/lib/types";
+import { services } from "@/lib/data";
+```
+
+---
+
+## 🎨 Tailwind CSS
+
+### Clases y Utilidades
+
+- **SIEMPRE** usar `cn()` de `@/lib/utils` para combinar clases
+- **SIEMPRE** usar colores del Manual de Marca IPROVA:
+  - `bg-primary` / `text-primary` (PANTONE 5255 C: #00184A - Navy Blue principal)
+  - `bg-secondary` / `text-secondary` (PANTONE 423 C: #8E9093 - Grey secundario)
+  - `bg-primary-light` / `text-primary-light` (#364F8C - Versión más clara para hover/gradientes)
+  - `bg-background-light` (#F8F9FA - Fondo claro)
+  - `bg-background-dark` (#121212 - Fondo oscuro)
+  - `bg-card-dark` (#1E1E1E - Cards en modo oscuro)
+- **NUNCA** hardcodear colores con valores arbitrarios a menos que sea absolutamente necesario
+- **SIEMPRE** mobile-first (clases base para mobile, luego `md:`, `lg:`)
+
+```typescript
+// ✅ CORRECTO
+<div className={cn("text-primary", isActive && "text-primary-light")}>
+
+// ❌ INCORRECTO
+<div className="text-[#00184A]">
+```
+
+### Responsive Design
+
+- **SIEMPRE** empezar con estilos mobile
+- Breakpoints: `sm:` (640px), `md:` (768px), `lg:` (1024px), `xl:` (1280px)
+- **SIEMPRE** probar en mobile primero
+
+---
+
+## 📝 Gestión de Contenido
+
+### Regla de Oro: Centralización
+
+**TODO el contenido editable debe estar en `lib/data.ts`**
+
+### Qué va en `lib/data.ts`:
+
+✅ **SÍ incluir:**
+- Textos de navegación (`navItems`)
+- Estadísticas (`stats`)
+- Servicios (`services`)
+- Features/Características (`whyUsFeatures`)
+- Información de contacto (`contactInfo`)
+- Contenido de secciones (`heroContent`, `servicesSectionContent`, etc.)
+- Links del footer (`footerQuickLinks`, `footerServices`)
+- Miembros del equipo (cuando se agregue)
+
+❌ **NO incluir:**
+- Lógica de negocio
+- Funciones utilitarias
+- Tipos complejos (van en `lib/types.ts` si es necesario)
+
+### Estructura de Datos
+
+- **SIEMPRE** usar `as const` para arrays/objetos que no cambian
+- **SIEMPRE** exportar interfaces para tipos reutilizables
+- **SIEMPRE** documentar con comentarios qué es cada sección
+
+```typescript
+// ✅ CORRECTO
+export const services: Service[] = [
+  {
+    title: "Defensa Penal",
+    description: "...",
+    href: "#servicios",
+    icon: Scale,
+  },
+] as const;
+
+// ✅ CORRECTO - Interface exportada
+export interface Service {
+  title: string;
+  description: string;
+  href: string;
+  icon: Icon;
+}
+```
+
+---
+
+## 🖼️ Imágenes y Assets
+
+- **SIEMPRE** usar `next/image` para imágenes
+- **SIEMPRE** usar `priority` en la imagen del hero
+- **SIEMPRE** proporcionar `alt` descriptivo
+- Imágenes van en `public/images/`
+- Usar rutas relativas desde `public/` (ej: `/images/hero.jpg`)
+
+### Overlay de Color Primario (Manual de Marca)
+
+**REGLA CRÍTICA**: Cuando uses imágenes de fondo o fotos, **SIEMPRE** aplicar un overlay del color primario de la marca (`bg-primary`) para:
+1. Integrar la imagen con la identidad visual
+2. Asegurar legibilidad del texto blanco sobre la imagen
+3. Mantener coherencia con el manual de marca
+
+```typescript
+// ✅ CORRECTO - Imagen con overlay del color primario
+<div className="relative">
+  <Image
+    src="/images/foto.jpg"
+    alt="Descripción"
+    fill
+    className="object-cover"
+  />
+  {/* Overlay del color primario de la marca (PANTONE 5255 C / #00184A) */}
+  <div className="absolute inset-0 bg-primary/70" />
+  {/* Texto blanco sobre el overlay será legible */}
+  <h2 className="relative z-10 text-white">Título</h2>
+</div>
+
+// ❌ INCORRECTO - Imagen sin overlay
+<div className="relative">
+  <Image src="/images/foto.jpg" alt="Descripción" fill />
+  <h2 className="text-white">Título</h2> {/* Puede no ser legible */}
+</div>
+```
+
+**Opciones de opacidad del overlay:**
+- `bg-primary/60` - Overlay ligero (para imágenes decorativas)
+- `bg-primary/70` - Overlay medio (recomendado para la mayoría de casos)
+- `bg-primary/80` - Overlay fuerte (para máximo contraste)
+- `bg-primary/90` - Overlay muy fuerte (para fondos de hero)
+
+---
+
+## 🔤 Tipografías
+
+- **SIEMPRE** usar **Montserrat** como fuente principal (según Manual de Marca IPROVA)
+- La fuente está configurada en `app/layout.tsx` y disponible como `font-sans`, `font-body`, `font-display`
+- **NUNCA** usar otras fuentes sin consultar el manual de marca
+- Pesos disponibles: 300 (light), 400 (regular), 500 (medium), 600 (semibold), 700 (bold), 800 (extrabold)
+
+```typescript
+// ✅ CORRECTO
+<h1 className="font-extrabold text-primary">Título</h1>
+<p className="font-light text-gray-600">Texto</p>
+
+// ❌ INCORRECTO
+<h1 className="font-serif">Título</h1> // No usar serif
+```
+
+## 🔗 Iconos
+
+- **SIEMPRE** usar `lucide-react` para iconos
+- **NUNCA** usar SVG inline o Material Icons
+- **SIEMPRE** importar iconos específicos (no `*`)
+- **SIEMPRE** usar tamaños consistentes: `h-4 w-4` (sm), `h-5 w-5` (md), `h-6 w-6` (lg), `text-2xl` o `text-3xl` para iconos grandes
+
+```typescript
+// ✅ CORRECTO
+import { Scale, Eye, Shield } from "lucide-react";
+<Scale className="h-5 w-5" />
+
+// ❌ INCORRECTO
+import * as Icons from "lucide-react";
+<span className="material-icons-outlined">menu</span> // No usar Material Icons
+```
+
+---
+
+## 🧩 Componentes Reutilizables
+
+### Crear Nuevos Componentes UI
+
+1. Crear en `components/ui/ComponentName.tsx`
+2. **SIEMPRE** tipar props con interface
+3. **SIEMPRE** usar `cn()` para clases
+4. **SIEMPRE** exportar como named export
+5. **SIEMPRE** hacer el componente flexible y reutilizable
+
+```typescript
+// ✅ CORRECTO - Ejemplo de componente UI
+interface CardProps {
+  title: string;
+  children: ReactNode;
+  className?: string;
+}
+
+export function Card({ title, children, className }: CardProps) {
+  return (
+    <div className={cn("bg-white rounded-lg p-6", className)}>
+      <h3>{title}</h3>
+      {children}
+    </div>
+  );
+}
+```
+
+---
+
+## 📱 Secciones de Página
+
+### Crear Nueva Sección
+
+1. Crear en `components/sections/SectionName.tsx`
+2. **SIEMPRE** importar datos de `lib/data.ts`
+3. **SIEMPRE** usar IDs semánticos para navegación (`id="servicios"`)
+4. **SIEMPRE** usar HTML semántico (`<section>`, `<article>`, `<header>`)
+5. **SIEMPRE** hacer responsive (mobile-first)
+
+```typescript
+// ✅ CORRECTO
+export function ServicesSection() {
+  const { services, servicesSectionContent } = useData(); // O import directo
+  return (
+    <section id="servicios" className="py-16">
+      {/* ... */}
+    </section>
+  );
+}
+```
+
+---
+
+## 🎯 Agregar Nuevos Servicios/Miembros/Items
+
+### Proceso Estándar:
+
+1. **Editar `lib/data.ts`** - Agregar/quitar items del array
+2. **NO tocar componentes** - Los componentes ya están preparados para renderizar dinámicamente
+3. **Verificar tipos** - Asegurar que el nuevo item cumple con la interface
+
+```typescript
+// ✅ CORRECTO - Solo editar data.ts
+export const services: Service[] = [
+  // ... servicios existentes
+  {
+    title: "Nuevo Servicio", // ← Solo agregar aquí
+    description: "...",
+    href: "#servicios",
+    icon: NewIcon,
+  },
+];
+```
+
+---
+
+## 🚫 Anti-Patrones (NUNCA hacer)
+
+❌ **NUNCA** hardcodear texto en componentes
+❌ **NUNCA** usar `any` en TypeScript
+❌ **NUNCA** crear componentes sin tipar props
+❌ **NUNCA** usar valores de color hardcodeados (usar sistema de diseño)
+❌ **NUNCA** mezclar lógica de negocio con presentación
+❌ **NUNCA** crear componentes que no sean reutilizables sin razón
+❌ **NUNCA** usar `console.log` en producción (usar sistema de logging)
+❌ **NUNCA** commitear archivos de configuración local (`.env.local`)
+
+---
+
+## ✅ Checklist para Nuevas Features
+
+Antes de considerar una feature completa:
+
+- [ ] ¿El contenido está en `lib/data.ts`?
+- [ ] ¿Los componentes están tipados correctamente?
+- [ ] ¿Es responsive (mobile-first)?
+- [ ] ¿Usa el sistema de diseño (colores, tipografías)?
+- [ ] ¿Tiene HTML semántico?
+- [ ] ¿Los iconos son de `lucide-react`?
+- [ ] ¿Las imágenes usan `next/image`?
+- [ ] ¿No hay código duplicado?
+- [ ] ¿Está documentado si es complejo?
+
+---
+
+## 📚 Recursos y Referencias
+
+- **Next.js 15 Docs**: https://nextjs.org/docs
+- **Tailwind CSS**: https://tailwindcss.com/docs
+- **Lucide Icons**: https://lucide.dev/icons/
+- **TypeScript**: https://www.typescriptlang.org/docs/
+
+---
+
+## 🔄 Flujo de Trabajo Recomendado
+
+1. **Planificar**: ¿Qué datos necesito? → Agregar a `lib/data.ts`
+2. **Crear componente**: En `components/sections/` o `components/ui/`
+3. **Tipar**: Crear interfaces para props
+4. **Estilizar**: Usar Tailwind con sistema de diseño
+5. **Testear**: Verificar responsive y funcionalidad
+6. **Refactorizar**: Eliminar duplicación, mejorar reutilización
+
+---
+
+**Última actualización**: 2024
+**Mantener este archivo actualizado** cuando se agreguen nuevas convenciones o patrones.
+
