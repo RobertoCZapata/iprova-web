@@ -25,10 +25,10 @@ export function Button({
 
   const variants = {
     primary:
-      "bg-white text-primary hover:bg-gray-50 shadow-lg active:scale-105 transform transition-transform",
+      "bg-white text-primary hover:bg-gray-50 hover:shadow-2xl hover:scale-105 shadow-lg active:scale-100 transform transition-all duration-300",
     "outline-light":
-      "border border-white text-white hover:bg-white hover:text-primary active:scale-105 transform transition-colors",
-    ghost: "text-primary hover:text-primary-light transition-colors",
+      "border-2 border-white text-white hover:bg-white hover:text-primary hover:shadow-xl hover:scale-105 active:scale-100 transform transition-all duration-300",
+    ghost: "text-primary hover:text-primary-light hover:underline transition-all duration-200",
   };
 
   const sizes = {

@@ -2,17 +2,17 @@ import { services, servicesSectionContent } from "@/lib/data";
 
 export function ServicesSection() {
   return (
-    <section className="py-24 bg-white dark:bg-background-dark" id="servicios">
+    <section className="py-24 bg-white" id="servicios">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-extrabold text-primary dark:text-white sm:text-4xl">
+          <h2 className="text-3xl font-extrabold text-primary sm:text-4xl">
             {servicesSectionContent.title}
           </h2>
-          <p className="mt-4 max-w-2xl text-xl text-gray-500 dark:text-gray-400 mx-auto">
+          <p className="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
             {servicesSectionContent.description}
           </p>
           {servicesSectionContent.detailedDescription && (
-            <p className="mt-4 max-w-3xl text-base text-gray-600 dark:text-gray-300 mx-auto">
+            <p className="mt-4 max-w-3xl text-base text-gray-600 mx-auto">
               {servicesSectionContent.detailedDescription}
             </p>
           )}
@@ -23,20 +23,23 @@ export function ServicesSection() {
             return (
               <article
                 key={service.title}
-                className="group bg-white dark:bg-card-dark rounded-xl p-8 shadow-sm hover:shadow-xl border border-gray-200 dark:border-gray-700 transition-all duration-300 hover:-translate-y-1"
+                className="group bg-white rounded-xl p-8 shadow-sm hover:shadow-xl border border-gray-200 transition-all duration-300 hover:-translate-y-1"
               >
-                <div className="w-14 h-14 bg-primary/10 dark:bg-primary/30 rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary transition-colors duration-300">
-                  <Icon className="text-primary dark:text-blue-300 text-3xl group-hover:text-white transition-colors duration-300" />
+                <div className="w-20 h-20 bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl flex items-center justify-center mb-6 group-hover:from-primary group-hover:to-primary-light group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-md group-hover:shadow-xl">
+                  <Icon
+                    className="w-10 h-10 text-primary group-hover:text-white transition-all duration-300 group-hover:scale-110"
+                    strokeWidth={1.5}
+                  />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">
                   {service.title}
                 </h3>
                 {service.subtitle && (
-                  <p className="text-primary dark:text-blue-400 font-semibold text-sm mb-3">
+                  <p className="text-primary font-semibold text-sm mb-3">
                     {service.subtitle}
                   </p>
                 )}
-                <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                <p className="text-gray-600 text-sm leading-relaxed">
                   {service.description}
                 </p>
               </article>

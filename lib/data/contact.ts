@@ -1,0 +1,57 @@
+/**
+ * Contact Information
+ * Información de contacto y configuración de WhatsApp
+ */
+
+// Contact Information (del Manual de Marca)
+export const contactInfo = {
+  address: {
+    street: "Calle 33 # 8-50",
+    neighborhood: "Cañaveral - Floridablanca",
+    city: "Santander - Colombia",
+  },
+  phones: ["+57 317 368 4975", "+57 318 220 0086"],
+  emails: {
+    abogados: "abogados@iprova.com.co",
+    investigadores: "investigadores@iprova.com.co",
+  },
+  website: "www.iprova.com.co",
+} as const;
+
+// WhatsApp Configuration
+export const whatsappConfig = {
+  phoneE164: "+573182200086", // Número principal en formato E.164 (WhatsApp)
+  displayPhone: "+57 318 220 0086",
+  defaultMessage:
+    "Hola, me gustaría agendar una consulta con iPROVA. Vengo desde el sitio web.",
+} as const;
+
+// CTA Section Content
+export const ctaContent = {
+  title: "¿Necesitas Asesoría Legal Profesional?",
+  description:
+    "No esperes más. Nuestro equipo está disponible 24/7 para brindarte la orientación legal que necesitas. Primera consulta sin costo.",
+  phone: {
+    label: "Llámanos ahora",
+    number: "+57 317 368 4975",
+    href: "tel:+573173684975",
+  },
+  whatsapp: {
+    label: "Escríbenos por WhatsApp",
+    action: "Abrir WhatsApp",
+    message: "Hola iPROVA, necesito asesoría legal profesional. Vengo desde el sitio web.",
+  },
+  email: {
+    label: "Escríbenos",
+    action: "Enviar Mensaje",
+    href: "mailto:abogados@iprova.com.co",
+  },
+  guarantee: "Respuesta garantizada en menos de 24 horas",
+  freeConsultation: "Consulta inicial gratuita",
+} as const;
+
+// Social Media Links
+export const socialLinks = {
+  facebook: "#",
+  instagram: "#",
+} as const;

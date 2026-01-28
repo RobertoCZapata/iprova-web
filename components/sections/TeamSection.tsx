@@ -3,17 +3,17 @@ import { teamMembers, teamSectionContent } from "@/lib/data";
 
 export function TeamSection() {
   return (
-    <section className="py-24 bg-white dark:bg-background-dark" id="equipo">
+    <section className="py-24 bg-white" id="equipo">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <span className="text-secondary font-bold tracking-widest uppercase text-sm mb-2 block">
             Profesionales
           </span>
-          <h2 className="text-4xl font-extrabold text-primary dark:text-white tracking-tight mb-4">
+          <h2 className="text-4xl font-extrabold text-primary tracking-tight mb-4">
             {teamSectionContent.title}
           </h2>
           <div className="w-20 h-1 bg-secondary mx-auto mt-6" />
-          <p className="mt-6 max-w-2xl text-gray-600 dark:text-gray-300 mx-auto text-lg font-light">
+          <p className="mt-6 max-w-2xl text-gray-600 mx-auto text-lg font-light">
             {teamSectionContent.description}
           </p>
         </div>
@@ -40,7 +40,7 @@ export function TeamSection() {
               </div>
 
               {/* Información */}
-              <h3 className="text-xl font-bold text-primary dark:text-white mb-2 tracking-tight">
+              <h3 className="text-xl font-bold text-primary mb-2 tracking-tight">
                 {member.name}
               </h3>
               <p className="text-secondary text-sm font-medium uppercase tracking-wider">

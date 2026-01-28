@@ -99,26 +99,35 @@ export default function RootLayout({
     image: `${siteUrl}/images/iProva-logo.png`,
     address: {
       "@type": "PostalAddress",
+      streetAddress: "Carrera 33 # 34A - 29",
+      addressLocality: "Bucaramanga",
+      addressRegion: "Santander",
       addressCountry: "CO",
-      addressLocality: "Bogotá",
-      addressRegion: "Cundinamarca",
     },
-    areaServed: {
-      "@type": "Country",
-      name: "Colombia",
-    },
+    areaServed: [
+      {
+        "@type": "City",
+        name: "Bucaramanga",
+      },
+      {
+        "@type": "State",
+        name: "Santander",
+      },
+      {
+        "@type": "Country",
+        name: "Colombia",
+      },
+    ],
+    telephone: "+57 317 4191991",
+    priceRange: "$$",
     serviceType: [
       "Defensa Penal",
       "Investigación Privada",
       "Investigación Corporativa",
       "Seguridad Corporativa",
       "Asesoría Legal Comercial",
+      "Contra-Interrogación",
     ],
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "150",
-    },
   };
 
   return (

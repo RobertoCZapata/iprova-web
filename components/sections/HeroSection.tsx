@@ -25,23 +25,23 @@ export function HeroSection() {
         <div className="flex flex-col lg:flex-row items-center">
           {/* Text Content */}
           <div className="w-full lg:w-3/5 text-left">
-            <div className="inline-block px-3 py-1 border border-secondary text-secondary text-xs font-bold tracking-widest uppercase mb-6 rounded-sm bg-primary/20 backdrop-blur-sm">
+            <div className="inline-block px-3 py-1 border border-white/60 text-white/90 text-xs font-bold tracking-widest uppercase mb-6 rounded-sm bg-white/10 backdrop-blur-sm">
               Abogados e Investigadores
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight mb-4 drop-shadow-lg">
               {heroContent.title.main}{" "}
-              <span className="text-secondary">
+              <span className="text-gray-200">
                 {heroContent.title.highlight}
               </span>
             </h1>
-            <p className="text-xl md:text-2xl text-secondary font-semibold mb-6 drop-shadow-md">
+            <p className="text-xl md:text-2xl text-gray-200 font-semibold mb-6 drop-shadow-md">
               {heroContent.tagline}
             </p>
             <p className="mt-6 text-gray-100 text-lg md:text-xl font-medium max-w-2xl mb-4 drop-shadow-md leading-relaxed">
               {heroContent.description}
             </p>
             {heroContent.benefit && (
-              <p className="mt-4 text-gray-300 text-base font-light max-w-2xl mb-10 drop-shadow-md italic border-l-4 border-secondary pl-6">
+              <p className="mt-4 text-gray-100 text-base font-light max-w-2xl mb-10 drop-shadow-md italic border-l-4 border-white/40 pl-6">
                 {heroContent.benefit}
               </p>
             )}
@@ -50,17 +50,27 @@ export function HeroSection() {
                 variant="primary"
                 size="md"
                 href={heroContent.cta.primary.href}
-                className="px-8 py-4 border border-secondary uppercase tracking-wider shadow-lg"
+                className="px-8 py-4 uppercase tracking-wider group"
               >
-                {heroContent.cta.primary.label}
+                <span className="relative">
+                  {heroContent.cta.primary.label}
+                  <span className="absolute -right-6 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-300">
+                    →
+                  </span>
+                </span>
               </Button>
               <Button
                 variant="outline-light"
                 size="md"
                 href={heroContent.cta.secondary.href}
-                className="px-8 py-4 border border-gray-400 uppercase tracking-wider backdrop-blur-sm bg-white/5 text-gray-200 hover:text-white hover:border-white"
+                className="px-8 py-4 uppercase tracking-wider backdrop-blur-sm group"
               >
-                {heroContent.cta.secondary.label}
+                <span className="relative">
+                  {heroContent.cta.secondary.label}
+                  <span className="absolute -right-6 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-300">
+                    →
+                  </span>
+                </span>
               </Button>
             </div>
           </div>

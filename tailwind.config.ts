@@ -10,7 +10,7 @@ const config: Config = {
     extend: {
       colors: {
         // Colores del Manual de Marca IPROVA
-        primary: "#00184A", // PANTONE 5255 C - Navy Blue principal
+        primary: "#001A4A", // PANTONE 5255 C - Navy Blue principal (corregido)
         secondary: "#8E9093", // PANTONE 423 C - Grey secundario
         "primary-light": "#364F8C", // Versión más clara para hover/gradientes
         // Colores de fondo

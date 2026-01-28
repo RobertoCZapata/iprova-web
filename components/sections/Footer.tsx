@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  Shield,
   MapPin,
   Phone,
   Mail,
@@ -18,13 +17,16 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand Column */}
           <div className="col-span-1 lg:col-span-1">
-            <div className="flex items-center space-x-3 mb-6">
-              <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center">
-                <Shield className="text-white h-6 w-6" />
+            <div className="flex items-center mb-6">
+              <div className="relative w-40 h-40 flex items-center justify-center">
+                <Image
+                  src="/icons/logo-iprova.svg"
+                  alt="iPROVA - Abogados e Investigadores"
+                  width={160}
+                  height={160}
+                  className="object-contain brightness-0 invert"
+                />
               </div>
-              <span className="text-white font-bold text-2xl tracking-widest">
-                {footerContent.brand.name}
-              </span>
             </div>
             <p className="text-gray-300 text-sm leading-relaxed mb-6">
               {footerContent.brand.description}

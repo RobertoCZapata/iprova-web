@@ -1,26 +1,14 @@
 import Image from "next/image";
-import { corporateValues, aboutUsContent } from "@/lib/data";
+import { aboutUsContent } from "@/lib/data";
 
 export function AboutUsSection() {
   return (
-    <section className="py-20 bg-white dark:bg-background-dark" id="nosotros">
+    <section className="py-20 bg-white" id="nosotros">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row gap-16 items-start">
-          {/* Left Column */}
-          <div className="lg:w-1/3">
-            <h2 className="text-4xl font-extrabold text-primary dark:text-white mb-6">
-              {aboutUsContent.title}
-            </h2>
-            <div className="h-1 w-20 bg-secondary mb-6" />
-            <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
-              {aboutUsContent.description}
-            </p>
-            {aboutUsContent.extendedDescription && (
-              <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-                {aboutUsContent.extendedDescription}
-              </p>
-            )}
-            <div className="relative h-64 w-full rounded-lg overflow-hidden shadow-lg mt-8">
+        <div className="flex flex-col lg:flex-row gap-16 items-center">
+          {/* Left Column - Image */}
+          <div className="lg:w-1/2">
+            <div className="relative h-96 w-full rounded-lg overflow-hidden shadow-lg">
               <Image
                 alt="Team handshake"
                 src="/images/handshake.jpg"
@@ -32,26 +20,20 @@ export function AboutUsSection() {
             </div>
           </div>
 
-          {/* Right Column - Values */}
-          <div className="lg:w-2/3 grid gap-10">
-            {corporateValues.map((value) => {
-              const Icon = value.icon;
-              return (
-                <div key={value.title} className="flex gap-4">
-                  <div className="flex-shrink-0 mt-1">
-                    <Icon className="text-primary dark:text-blue-400 text-3xl" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-primary dark:text-white mb-2 uppercase">
-                      {value.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-400">
-                      {value.description}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
+          {/* Right Column - Content */}
+          <div className="lg:w-1/2">
+            <h2 className="text-4xl font-extrabold text-primary mb-6">
+              {aboutUsContent.title}
+            </h2>
+            <div className="h-1 w-20 bg-secondary mb-6" />
+            <p className="text-gray-600 leading-relaxed mb-4">
+              {aboutUsContent.description}
+            </p>
+            {aboutUsContent.extendedDescription && (
+              <p className="text-gray-600 leading-relaxed mb-6">
+                {aboutUsContent.extendedDescription}
+              </p>
+            )}
           </div>
         </div>
       </div>
