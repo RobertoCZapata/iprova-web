@@ -9,6 +9,7 @@ interface ButtonProps {
   href?: string;
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
+  "aria-label"?: string;
 }
 
 export function Button({
@@ -19,6 +20,7 @@ export function Button({
   href,
   onClick,
   type = "button",
+  "aria-label": ariaLabel,
 }: ButtonProps) {
   const base =
     "inline-flex items-center justify-center font-semibold rounded-md transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-primary focus-visible:ring-primary-light group";
@@ -40,14 +42,14 @@ export function Button({
 
   if (href) {
     return (
-      <a href={href} className={classes}>
+      <a href={href} className={classes} aria-label={ariaLabel}>
         {children}
       </a>
     );
   }
 
   return (
-    <button type={type} onClick={onClick} className={classes}>
+    <button type={type} onClick={onClick} className={classes} aria-label={ariaLabel}>
       {children}
     </button>
   );

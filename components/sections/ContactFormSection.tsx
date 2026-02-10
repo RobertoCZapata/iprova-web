@@ -123,6 +123,7 @@ export function ContactFormSection() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-gray-600 hover:text-primary text-sm leading-relaxed transition-colors inline-block group"
+                      aria-label="Ver dirección de iPROVA en Google Maps"
                     >
                       <span className="group-hover:underline">
                         {contactInfo.address.street}
@@ -152,6 +153,7 @@ export function ContactFormSection() {
                         key={index}
                         href={`tel:${phone.replace(/\s/g, "")}`}
                         className="block text-gray-600 hover:text-primary transition-colors text-sm"
+                        aria-label={`Llamar al teléfono ${phone}`}
                       >
                         {phone}
                       </a>
@@ -169,12 +171,14 @@ export function ContactFormSection() {
                     <a
                       href={`mailto:${contactInfo.emails.abogados}`}
                       className="block text-gray-600 hover:text-primary transition-colors text-sm"
+                      aria-label="Enviar correo a abogados de iPROVA"
                     >
                       {contactInfo.emails.abogados}
                     </a>
                     <a
                       href={`mailto:${contactInfo.emails.investigadores}`}
                       className="block text-gray-600 hover:text-primary transition-colors text-sm"
+                      aria-label="Enviar correo a investigadores de iPROVA"
                     >
                       {contactInfo.emails.investigadores}
                     </a>

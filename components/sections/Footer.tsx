@@ -102,6 +102,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-300 text-sm hover:text-white transition-colors group"
+                  aria-label="Ver ubicación de iPROVA en Google Maps"
                 >
                   {contactInfo.address.street}
                   <br />
@@ -128,6 +129,7 @@ export function Footer() {
                   <a
                     href={`tel:${phone.replace(/\s/g, "")}`}
                     className="text-gray-300 text-sm hover:text-white transition-colors"
+                    aria-label={`Llamar al teléfono ${phone}`}
                   >
                     {phone}
                   </a>
@@ -147,6 +149,7 @@ export function Footer() {
                 <a
                   href={`mailto:${contactInfo.emails.abogados}`}
                   className="text-gray-300 text-sm hover:text-white transition-colors"
+                  aria-label="Enviar correo a abogados de iPROVA"
                 >
                   {contactInfo.emails.abogados}
                 </a>
@@ -156,6 +159,7 @@ export function Footer() {
                 <a
                   href={`mailto:${contactInfo.emails.investigadores}`}
                   className="text-gray-300 text-sm hover:text-white transition-colors"
+                  aria-label="Enviar correo a investigadores de iPROVA"
                 >
                   {contactInfo.emails.investigadores}
                 </a>
@@ -167,6 +171,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-300 text-sm hover:text-white transition-colors"
+                  aria-label={`Visitar sitio web ${contactInfo.website}`}
                 >
                   {contactInfo.website}
                 </a>

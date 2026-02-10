@@ -44,7 +44,11 @@ export function CtaSection() {
           <div className="h-1 w-24 bg-white/40 mx-auto" />
           <p className="mt-6 text-xl text-white/90 mb-12 max-w-2xl mx-auto leading-relaxed">
             {ctaContent.description} Conoce más sobre{" "}
-            <a href="#servicios" className="text-white font-bold hover:text-white/80 hover:underline">
+            <a
+              href="#servicios"
+              className="text-white font-bold hover:text-white/80 hover:underline"
+              aria-label="Ir a la sección de servicios"
+            >
               nuestros servicios
             </a>.
           </p>
@@ -56,6 +60,7 @@ export function CtaSection() {
               className="group bg-white text-primary px-8 py-4 rounded-sm flex items-center gap-3 hover:bg-white/95 transition-all duration-300 shadow-xl hover:shadow-2xl min-w-[250px] justify-center font-semibold"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              aria-label={`Llamar ahora al ${ctaContent.phone.number}`}
             >
               <Phone
                 className="group-hover:rotate-12 transition-transform"
@@ -75,6 +80,7 @@ export function CtaSection() {
               className="group bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-sm flex items-center gap-3 transition-all duration-300 shadow-xl hover:shadow-2xl min-w-[250px] justify-center font-semibold"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              aria-label="Enviar mensaje por WhatsApp a iPROVA"
             >
               <MessageSquare
                 className="group-hover:scale-110 transition-transform"
@@ -94,6 +100,7 @@ export function CtaSection() {
               className="group border-2 border-white text-white px-8 py-4 rounded-sm flex items-center gap-3 hover:bg-white/10 transition-all duration-300 min-w-[250px] justify-center font-semibold"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              aria-label="Enviar correo electrónico a iPROVA"
             >
               <Mail size={24} />
               <div className="text-left">
