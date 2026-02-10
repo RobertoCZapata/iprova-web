@@ -97,13 +97,21 @@ export function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start">
                 <MapPin className="text-gray-400 mr-2 mt-1 flex-shrink-0" />
-                <span className="text-gray-300 text-sm">
+                <a
+                  href={contactInfo.address.googleMapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-300 text-sm hover:text-white transition-colors group"
+                >
                   {contactInfo.address.street}
                   <br />
                   {contactInfo.address.neighborhood}
                   <br />
                   {contactInfo.address.city}
-                </span>
+                  <span className="block text-xs text-gray-400 group-hover:text-white mt-1 transition-colors">
+                    📍 Ver en Google Maps
+                  </span>
+                </a>
               </li>
             </ul>
           </div>
