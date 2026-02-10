@@ -118,13 +118,23 @@ export function ContactFormSection() {
                     <h4 className="font-semibold text-gray-900 mb-1">
                       Dirección
                     </h4>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      {contactInfo.address.street}
-                      <br />
-                      {contactInfo.address.neighborhood}
-                      <br />
-                      {contactInfo.address.city}
-                    </p>
+                    <a
+                      href={contactInfo.address.googleMapsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-600 hover:text-primary text-sm leading-relaxed transition-colors inline-block group"
+                    >
+                      <span className="group-hover:underline">
+                        {contactInfo.address.street}
+                        <br />
+                        {contactInfo.address.neighborhood}
+                        <br />
+                        {contactInfo.address.city}
+                      </span>
+                      <span className="block text-xs text-primary mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        📍 Ver en Google Maps
+                      </span>
+                    </a>
                   </div>
                 </div>
 

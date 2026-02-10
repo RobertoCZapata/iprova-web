@@ -9,6 +9,12 @@ export const contactInfo = {
     street: "Calle 33 # 8-50",
     neighborhood: "Cañaveral - Floridablanca",
     city: "Santander - Colombia",
+    coordinates: {
+      lat: 7.0620,
+      lng: -73.0864,
+    },
+    // URL de Google Maps con coordenadas exactas
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=7.0620,-73.0864",
   },
   phones: ["+57 317 368 4975", "+57 318 220 0086"],
   emails: {
