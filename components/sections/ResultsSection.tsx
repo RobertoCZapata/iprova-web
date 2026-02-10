@@ -153,7 +153,7 @@ export function ResultsSection() {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 mb-8">
               <div>
-                <p className="text-white/90 text-base lg:text-lg leading-relaxed mb-6">
+                <p className="text-white text-base lg:text-lg leading-relaxed mb-6">
                   {resultsContent.featuredCase.description}
                 </p>
 
@@ -166,7 +166,7 @@ export function ResultsSection() {
                     <div className="font-bold text-lg mb-1">
                       {resultsContent.featuredCase.result}
                     </div>
-                    <div className="text-white/90">
+                    <div className="text-white">
                       {resultsContent.featuredCase.resultDetail}
                     </div>
                   </div>
@@ -183,7 +183,7 @@ export function ResultsSection() {
                 <div className="text-6xl lg:text-7xl text-white/30 font-serif mb-4 text-right">
                   "
                 </div>
-                <div className="text-sm text-white/70 font-semibold">
+                <div className="text-sm text-white font-semibold">
                   — {resultsContent.featuredCase.client},{" "}
                   {resultsContent.featuredCase.year}
                 </div>

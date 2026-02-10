@@ -22,7 +22,7 @@ export function ValuesSection() {
           <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
             Nuestros Valores
           </h2>
-          <p className="text-lg text-white/90 max-w-2xl mx-auto">
+          <p className="text-lg text-white max-w-2xl mx-auto">
             Los pilares que guían nuestro compromiso con la justicia y la
             excelencia profesional
           </p>
@@ -48,7 +48,7 @@ export function ValuesSection() {
                 <h3 className="text-xl font-bold text-white mb-4">
                   {value.title}
                 </h3>
-                <p className="text-white/80 leading-relaxed">
+                <p className="text-white leading-relaxed">
                   {value.description}
                 </p>
               </motion.div>

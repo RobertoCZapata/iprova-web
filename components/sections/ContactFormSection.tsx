@@ -193,7 +193,7 @@ export function ContactFormSection() {
                 <CheckCircle2 size={24} />
                 <h4 className="font-bold text-lg">Compromisos de servicio</h4>
               </div>
-              <ul className="space-y-2 text-sm text-white/90">
+              <ul className="space-y-2 text-sm text-white">
                 <li>✓ Confirmación de recepción del mensaje</li>
                 <li>✓ Tiempo de respuesta estimado: 1 día hábil</li>
                 <li>✓ Confidencialidad y reserva profesional</li>
@@ -374,7 +374,7 @@ export function ContactFormSection() {
                 </button>
               </div>
 
-              <p className="text-xs text-gray-500 text-center mt-4">
+              <p className="text-xs text-gray-600 text-center mt-4">
                 Al enviar este formulario, aceptas nuestra política de
                 privacidad y el tratamiento de tus datos personales.
               </p>

@@ -41,7 +41,7 @@ export function StatsSection() {
                     </span>
                   )}
                 </div>
-                <p className="text-sm text-gray-300 uppercase tracking-wider font-medium">
+                <p className="text-sm text-white uppercase tracking-wider font-medium">
                   {stat.label}
                 </p>
               </div>

@@ -42,11 +42,11 @@ export function CtaSection() {
             {ctaContent.title}
           </h2>
           <div className="h-1 w-24 bg-white/40 mx-auto" />
-          <p className="mt-6 text-xl text-white/90 mb-12 max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-6 text-xl text-white mb-12 max-w-2xl mx-auto leading-relaxed">
             {ctaContent.description} Conoce más sobre{" "}
             <a
               href="#servicios"
-              className="text-white font-bold hover:text-white/80 hover:underline"
+              className="text-white font-bold hover:text-white hover:underline"
               aria-label="Ir a la sección de servicios"
             >
               nuestros servicios
@@ -67,7 +67,7 @@ export function CtaSection() {
                 size={24}
               />
               <div className="text-left">
-                <div className="text-xs text-primary/70 uppercase tracking-wide">
+                <div className="text-xs text-primary uppercase tracking-wide">
                   {ctaContent.phone.label}
                 </div>
                 <div className="font-bold">{ctaContent.phone.number}</div>
@@ -104,7 +104,7 @@ export function CtaSection() {
             >
               <Mail size={24} />
               <div className="text-left">
-                <div className="text-xs text-white/80 uppercase tracking-wide">
+                <div className="text-xs text-white uppercase tracking-wide">
                   {ctaContent.email.label}
                 </div>
                 <div className="font-bold">{ctaContent.email.action}</div>
@@ -117,7 +117,7 @@ export function CtaSection() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-white/80 text-sm mt-8"
+            className="text-white text-sm mt-8"
           >
             <span className="font-semibold">{ctaContent.guarantee}</span> ·{" "}
             {ctaContent.freeConsultation}

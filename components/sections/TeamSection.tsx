@@ -72,7 +72,7 @@ export function TeamSection() {
                           href={member.linkedIn}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-gray-400 hover:text-primary transition-colors"
+                          className="text-gray-600 hover:text-primary transition-colors"
                         >
                           <Linkedin size={18} />
                         </a>
@@ -136,7 +136,7 @@ export function TeamSection() {
                           href={member.linkedIn}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-gray-400 hover:text-primary transition-colors"
+                          className="text-gray-600 hover:text-primary transition-colors"
                         >
                           <Linkedin size={18} />
                         </a>

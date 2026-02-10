@@ -28,20 +28,20 @@ export function Footer() {
                 />
               </div>
             </div>
-            <p className="text-gray-300 text-sm leading-relaxed mb-6">
+            <p className="text-white text-sm leading-relaxed mb-6">
               {footerContent.brand.description}
             </p>
             <div className="flex space-x-4 mb-6">
               <a
                 href={socialLinks.facebook}
-                className="text-gray-300 hover:text-white transition-colors"
+                className="text-white hover:text-gray-100 transition-colors"
                 aria-label="Facebook"
               >
                 <Facebook className="h-6 w-6" />
               </a>
               <a
                 href={socialLinks.instagram}
-                className="text-gray-300 hover:text-white transition-colors"
+                className="text-white hover:text-gray-100 transition-colors"
                 aria-label="Instagram"
               >
                 <Instagram className="h-6 w-6" />
@@ -49,14 +49,14 @@ export function Footer() {
             </div>
             {/* Enlaces internos rápidos */}
             <div className="space-y-2">
-              <h4 className="text-sm font-semibold uppercase tracking-wider text-gray-300 mb-2">
+              <h4 className="text-sm font-semibold uppercase tracking-wider text-white mb-2">
                 Navegación
               </h4>
               <ul className="space-y-1">
                 <li>
                   <a
                     href="#inicio"
-                    className="text-gray-300 text-sm hover:text-white transition-colors"
+                    className="text-white text-sm hover:text-gray-100 transition-colors"
                   >
                     Inicio
                   </a>
@@ -64,7 +64,7 @@ export function Footer() {
                 <li>
                   <a
                     href="#nosotros"
-                    className="text-gray-300 text-sm hover:text-white transition-colors"
+                    className="text-white text-sm hover:text-gray-100 transition-colors"
                   >
                     Nosotros
                   </a>
@@ -72,7 +72,7 @@ export function Footer() {
                 <li>
                   <a
                     href="#servicios"
-                    className="text-gray-300 text-sm hover:text-white transition-colors"
+                    className="text-white text-sm hover:text-gray-100 transition-colors"
                   >
                     Servicios
                   </a>
@@ -80,7 +80,7 @@ export function Footer() {
                 <li>
                   <a
                     href="#equipo"
-                    className="text-gray-300 text-sm hover:text-white transition-colors"
+                    className="text-white text-sm hover:text-gray-100 transition-colors"
                   >
                     Equipo
                   </a>
@@ -96,12 +96,12 @@ export function Footer() {
             </h3>
             <ul className="space-y-4">
               <li className="flex items-start">
-                <MapPin className="text-gray-400 mr-2 mt-1 flex-shrink-0" />
+                <MapPin className="text-gray-200 mr-2 mt-1 flex-shrink-0" />
                 <a
                   href={contactInfo.address.googleMapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-300 text-sm hover:text-white transition-colors group"
+                  className="text-white text-sm hover:text-white transition-colors group"
                   aria-label="Ver ubicación de iPROVA en Google Maps"
                 >
                   {contactInfo.address.street}
@@ -109,7 +109,7 @@ export function Footer() {
                   {contactInfo.address.neighborhood}
                   <br />
                   {contactInfo.address.city}
-                  <span className="block text-xs text-gray-400 group-hover:text-white mt-1 transition-colors">
+                  <span className="block text-xs text-gray-200 group-hover:text-white mt-1 transition-colors">
                     📍 Ver en Google Maps
                   </span>
                 </a>
@@ -125,10 +125,10 @@ export function Footer() {
             <ul className="space-y-4">
               {contactInfo.phones.map((phone) => (
                 <li key={phone} className="flex items-center">
-                  <Phone className="text-gray-400 mr-2 flex-shrink-0" />
+                  <Phone className="text-gray-200 mr-2 flex-shrink-0" />
                   <a
                     href={`tel:${phone.replace(/\s/g, "")}`}
-                    className="text-gray-300 text-sm hover:text-white transition-colors"
+                    className="text-white text-sm hover:text-white transition-colors"
                     aria-label={`Llamar al teléfono ${phone}`}
                   >
                     {phone}
@@ -145,32 +145,32 @@ export function Footer() {
             </h3>
             <ul className="space-y-4">
               <li className="flex items-center">
-                <Mail className="text-gray-400 mr-2 flex-shrink-0" />
+                <Mail className="text-gray-200 mr-2 flex-shrink-0" />
                 <a
                   href={`mailto:${contactInfo.emails.abogados}`}
-                  className="text-gray-300 text-sm hover:text-white transition-colors"
+                  className="text-white text-sm hover:text-white transition-colors"
                   aria-label="Enviar correo a abogados de iPROVA"
                 >
                   {contactInfo.emails.abogados}
                 </a>
               </li>
               <li className="flex items-center">
-                <Mail className="text-gray-400 mr-2 flex-shrink-0" />
+                <Mail className="text-gray-200 mr-2 flex-shrink-0" />
                 <a
                   href={`mailto:${contactInfo.emails.investigadores}`}
-                  className="text-gray-300 text-sm hover:text-white transition-colors"
+                  className="text-white text-sm hover:text-white transition-colors"
                   aria-label="Enviar correo a investigadores de iPROVA"
                 >
                   {contactInfo.emails.investigadores}
                 </a>
               </li>
               <li className="flex items-center">
-                <Globe className="text-gray-400 mr-2 flex-shrink-0" />
+                <Globe className="text-gray-200 mr-2 flex-shrink-0" />
                 <a
                   href={`https://${contactInfo.website}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-300 text-sm hover:text-white transition-colors"
+                  className="text-white text-sm hover:text-white transition-colors"
                   aria-label={`Visitar sitio web ${contactInfo.website}`}
                 >
                   {contactInfo.website}
@@ -181,7 +181,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-gray-700 mt-12 pt-8 text-center">
-          <p className="text-gray-400 text-sm">{footerContent.copyright}</p>
+          <p className="text-gray-200 text-sm">{footerContent.copyright}</p>
         </div>
       </div>
     </footer>
