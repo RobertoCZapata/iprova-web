@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { LogoiProva } from "@/components/ui/LogoiProva";
 
@@ -100,6 +101,14 @@ export function Header() {
               Equipo
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" aria-hidden="true"></span>
             </button>
+            <Link
+              href="/blog"
+              className="relative text-gray-800 hover:text-primary transition-colors font-medium group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded px-2 py-1"
+              aria-label="Ir al Blog"
+            >
+              Blog
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" aria-hidden="true"></span>
+            </Link>
             <button
               onClick={() => scrollToSection("contacto")}
               className="relative text-gray-800 hover:text-primary transition-colors font-medium group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded px-2 py-1"
@@ -169,6 +178,14 @@ export function Header() {
             >
               Equipo
             </button>
+            <Link
+              href="/blog"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block w-full text-left py-2 px-3 text-gray-800 hover:text-primary hover:bg-primary/5 rounded transition-all duration-200 font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset"
+              aria-label="Ir al Blog"
+            >
+              Blog
+            </Link>
             <button
               onClick={() => scrollToSection("contacto")}
               className="block w-full text-left py-2 px-3 text-gray-800 hover:text-primary hover:bg-primary/5 rounded transition-all duration-200 font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset"
