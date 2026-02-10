@@ -1,104 +1,62 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Send, CheckCircle2, Phone, Mail, MapPin, Loader2 } from "lucide-react";
 import { contactInfo } from "@/lib/data";
-
-interface FormData {
-  name: string;
-  email: string;
-  phone: string;
-  service: string;
-  message: string;
-}
-
-interface FormErrors {
-  name?: string;
-  email?: string;
-  phone?: string;
-  service?: string;
-  message?: string;
-}
+import { trackFormSubmit } from "@/lib/analytics/events";
 
 export function ContactFormSection() {
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     service: "",
     message: "",
   });
-
-  const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [submitError, setSubmitError] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const validateForm = (): boolean => {
-    const newErrors: FormErrors = {};
-
-    if (!formData.name.trim()) {
-      newErrors.name = "El nombre es requerido";
-    }
-
-    if (!formData.email.trim()) {
-      newErrors.email = "El email es requerido";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "El email no es válido";
-    }
-
-    if (!formData.phone.trim()) {
-      newErrors.phone = "El teléfono es requerido";
-    } else if (!/^[0-9\s\-\+\(\)]{7,}$/.test(formData.phone)) {
-      newErrors.phone = "El teléfono no es válido";
-    }
-
-    if (!formData.service) {
-      newErrors.service = "Por favor selecciona un servicio";
-    }
-
-    if (!formData.message.trim()) {
-      newErrors.message = "El mensaje es requerido";
-    } else if (formData.message.trim().length < 10) {
-      newErrors.message = "El mensaje debe tener al menos 10 caracteres";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    setSubmitError(null);
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitError(false);
-
-    if (!validateForm()) {
-      return;
-    }
-
+    setSubmitError(null);
     setIsSubmitting(true);
 
     try {
-      // Aquí puedes integrar con tu servicio de email preferido
-      // Ejemplo con Web3Forms (gratis y sin backend)
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("/api/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          access_key: "YOUR_WEB3FORMS_ACCESS_KEY", // Reemplazar con tu access key
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
-          service: formData.service,
+          subject: formData.service,
           message: formData.message,
-          subject: `Nueva consulta de ${formData.name} - ${formData.service}`,
         }),
       });
 
-      if (response.ok) {
-        setSubmitSuccess(true);
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Error al enviar el mensaje");
+      }
+
+      setSubmitSuccess(true);
+      trackFormSubmit("contact_form");
+
+      // Reset form after 3 seconds
+      setTimeout(() => {
         setFormData({
           name: "",
           email: "",
@@ -106,27 +64,14 @@ export function ContactFormSection() {
           service: "",
           message: "",
         });
-        setTimeout(() => setSubmitSuccess(false), 5000);
-      } else {
-        setSubmitError(true);
-      }
-    } catch (error) {
-      setSubmitError(true);
+        setSubmitSuccess(false);
+      }, 3000);
+    } catch (err) {
+      setSubmitError(
+        err instanceof Error ? err.message : "Error al enviar el mensaje"
+      );
     } finally {
       setIsSubmitting(false);
-    }
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >,
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    // Clear error when user starts typing
-    if (errors[name as keyof FormErrors]) {
-      setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
   };
 
@@ -267,10 +212,7 @@ export function ContactFormSection() {
 
               {submitError && (
                 <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
-                  <p className="text-sm font-medium">
-                    Hubo un error al enviar tu mensaje. Por favor, intenta
-                    nuevamente o contáctanos por teléfono.
-                  </p>
+                  <p className="text-sm font-medium">{submitError}</p>
                 </div>
               )}
 
@@ -289,16 +231,10 @@ export function ContactFormSection() {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all ${
-                      errors.name
-                        ? "border-red-500 bg-red-50"
-                        : "border-gray-300"
-                    }`}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                     placeholder="Juan Pérez"
                   />
-                  {errors.name && (
-                    <p className="text-red-500 text-xs mt-1">{errors.name}</p>
-                  )}
                 </div>
 
                 {/* Email */}
@@ -315,16 +251,10 @@ export function ContactFormSection() {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all ${
-                      errors.email
-                        ? "border-red-500 bg-red-50"
-                        : "border-gray-300"
-                    }`}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                     placeholder="juan@ejemplo.com"
                   />
-                  {errors.email && (
-                    <p className="text-red-500 text-xs mt-1">{errors.email}</p>
-                  )}
                 </div>
 
                 {/* Phone */}
@@ -341,16 +271,10 @@ export function ContactFormSection() {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all ${
-                      errors.phone
-                        ? "border-red-500 bg-red-50"
-                        : "border-gray-300"
-                    }`}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                     placeholder="+57 300 123 4567"
                   />
-                  {errors.phone && (
-                    <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
-                  )}
                 </div>
 
                 {/* Service */}
@@ -366,34 +290,26 @@ export function ContactFormSection() {
                     name="service"
                     value={formData.service}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all ${
-                      errors.service
-                        ? "border-red-500 bg-red-50"
-                        : "border-gray-300"
-                    }`}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                   >
                     <option value="">Selecciona un servicio</option>
-                    <option value="defensa-judicial">Defensa Judicial</option>
-                    <option value="defensa-lesiones">
+                    <option value="Defensa Judicial">Defensa Judicial</option>
+                    <option value="Defensa de Lesiones">
                       Defensa de Lesiones
                     </option>
-                    <option value="asesoria-juridica">Asesoría Jurídica</option>
-                    <option value="investigacion-judicial">
+                    <option value="Asesoría Jurídica">Asesoría Jurídica</option>
+                    <option value="Investigación Judicial">
                       Investigación Judicial
                     </option>
-                    <option value="seguridad-corporativa">
+                    <option value="Seguridad Corporativa">
                       Seguridad Corporativa
                     </option>
-                    <option value="contrainterrogacion">
+                    <option value="Contra-Interrogación">
                       Contra-Interrogación
                     </option>
-                    <option value="otro">Otro</option>
+                    <option value="Otro">Otro</option>
                   </select>
-                  {errors.service && (
-                    <p className="text-red-500 text-xs mt-1">
-                      {errors.service}
-                    </p>
-                  )}
                 </div>
               </div>
 
@@ -411,29 +327,29 @@ export function ContactFormSection() {
                   value={formData.message}
                   onChange={handleChange}
                   rows={5}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none ${
-                    errors.message
-                      ? "border-red-500 bg-red-50"
-                      : "border-gray-300"
-                  }`}
+                  required
+                  minLength={10}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
                   placeholder="Cuéntanos sobre tu caso o consulta..."
                 />
-                {errors.message && (
-                  <p className="text-red-500 text-xs mt-1">{errors.message}</p>
-                )}
               </div>
 
               {/* Submit Button */}
               <div className="mt-8">
                 <button
                   type="submit"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || submitSuccess}
                   className="w-full bg-primary text-white px-8 py-4 rounded-lg font-semibold uppercase tracking-wider hover:bg-primary-light transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 shadow-lg hover:shadow-xl"
                 >
                   {isSubmitting ? (
                     <>
                       <Loader2 className="animate-spin" size={20} />
                       Enviando...
+                    </>
+                  ) : submitSuccess ? (
+                    <>
+                      <CheckCircle2 size={20} />
+                      Enviado
                     </>
                   ) : (
                     <>
