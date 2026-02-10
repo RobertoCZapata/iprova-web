@@ -1,8 +1,9 @@
 import { Header } from "@/components/sections/Header";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { TrustValuesSection } from "@/components/sections/TrustValuesSection";
+import { QuoteDivider } from "@/components/sections/QuoteDivider";
+import { SimpleDivider } from "@/components/sections/SimpleDivider";
 import { AboutUsSection } from "@/components/sections/AboutUsSection";
-import { ValuesSection } from "@/components/sections/ValuesSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
 import { WhyChooseUsSection } from "@/components/sections/WhyChooseUsSection";
 import { ResultsSection } from "@/components/sections/ResultsSection";
@@ -18,11 +19,15 @@ export default function Home() {
       <Header />
       <HeroSection />
       <TrustValuesSection />
-      <AboutUsSection />
-      <ValuesSection />
+      <QuoteDivider />
       <ServicesSection />
+      <SimpleDivider />
+      <AboutUsSection />
+      <SimpleDivider />
       <WhyChooseUsSection />
+      <SimpleDivider />
       <ResultsSection />
+      <SimpleDivider />
       <TeamSection />
       <CtaSection />
       <ContactFormSection />

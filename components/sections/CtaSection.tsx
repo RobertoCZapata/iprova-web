@@ -38,10 +38,11 @@ export function CtaSection() {
           transition={{ duration: 0.6 }}
           className="text-center"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-6">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-3">
             {ctaContent.title}
           </h2>
-          <p className="text-xl text-white/90 mb-12 max-w-2xl mx-auto leading-relaxed">
+          <div className="h-1 w-24 bg-white/40 mx-auto" />
+          <p className="mt-6 text-xl text-white/90 mb-12 max-w-2xl mx-auto leading-relaxed">
             {ctaContent.description}
           </p>
 

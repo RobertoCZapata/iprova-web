@@ -30,7 +30,7 @@ export const whatsappConfig = {
 export const ctaContent = {
   title: "¿Necesitas Asesoría Legal Profesional?",
   description:
-    "No esperes más. Nuestro equipo está disponible 24/7 para brindarte la orientación legal que necesitas. Primera consulta sin costo.",
+    "Agenda una consulta. Te respondemos con una ruta inicial y un plan de trabajo.",
   phone: {
     label: "Llámanos ahora",
     number: "+57 317 368 4975",
@@ -46,8 +46,8 @@ export const ctaContent = {
     action: "Enviar Mensaje",
     href: "mailto:abogados@iprova.com.co",
   },
-  guarantee: "Respuesta garantizada en menos de 24 horas",
-  freeConsultation: "Consulta inicial gratuita",
+  guarantee: "Tiempo de respuesta estimado: 1 día hábil",
+  freeConsultation: "Respondemos lo antes posible. En casos urgentes, priorizamos la atención",
 } as const;
 
 // Social Media Links

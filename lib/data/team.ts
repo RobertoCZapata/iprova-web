@@ -6,30 +6,39 @@
 // Team Members
 export interface TeamMember {
   name: string;
-  role: string;
+  title: string;
+  focus: string;
   image: string;
+  isFounding: boolean;
+  linkedIn?: string;
 }
 
 export const teamMembers: TeamMember[] = [
+  // Socios Fundadores
   {
-    name: "Henry Zapata Reyes",
-    role: "Abogado Penalista",
+    name: "Henry ZAPATA REYES",
+    title: "Socio fundador | Penal y disciplinario | Contrainterrogatorio",
+    focus: "Teoría del caso y defensa sancionatoria",
     image: "/images/team/henry-zapata.jpg",
+    isFounding: true,
+    linkedIn: "",
   },
   {
-    name: "Javier Pedraza Lizarazo",
-    role: "Abogado Investigador",
+    name: "Javier PEDRAZA",
+    title: "Socio fundador | Penal | Investigación privada",
+    focus: "Investigación y evidencia",
     image: "/images/team/javier-pedraza.jpg",
+    isFounding: true,
+    linkedIn: "",
   },
+  // Equipo / Asociados
   {
-    name: "Maria Fernanda Gonzalez",
-    role: "Abogada",
-    image: "/images/team/maria-fernanda.jpg",
-  },
-  {
-    name: "Hernan Dario Zapata",
-    role: "Abogado Comercial",
+    name: "Hernán Darío ZAPATA VILLAR",
+    title: "Asociado | Comercial y laboral",
+    focus: "Contratos, laboral e insolvencia",
     image: "/images/team/hernan-dario.jpg",
+    isFounding: false,
+    linkedIn: "",
   },
 ];
 
@@ -37,5 +46,5 @@ export const teamMembers: TeamMember[] = [
 export const teamSectionContent = {
   title: "Nuestro Equipo",
   description:
-    "Profesionales comprometidos con la excelencia y la defensa de sus intereses.",
+    "Un equipo integrado de abogados e investigadores, con método, técnica y rigor probatorio.",
 } as const;

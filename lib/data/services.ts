@@ -5,78 +5,88 @@
 
 import {
   Scale,
-  ShieldCheck,
-  FileText,
-  SearchCheck,
-  Shield,
+  Gavel,
+  FileCheck,
+  Briefcase,
+  RefreshCw,
   Mic,
+  AlertTriangle,
+  Building,
+  SearchCheck,
   type LucideIcon,
 } from "lucide-react";
 
-// Services (del Manual de Marca)
+// Services (Actualizado con contenido detallado)
 export interface Service {
   title: string;
-  subtitle?: string; // Beneficio directo (UX Writing)
   description: string;
   href: string;
-  icon: LucideIcon; // Deprecated - mantener por compatibilidad
-  iconName: string; // Nombre del archivo SVG en /public/icons/
+  icon: LucideIcon;
 }
 
 export const services: Service[] = [
   {
-    title: "Defensa Judicial",
-    subtitle: "Protegemos tu futuro tras un accidente",
+    title: "Defensa Penal",
     description:
-      "No solo te representamos en el juzgado. Investigamos a fondo tu caso, recopilamos evidencia que otros pasan por alto y construimos una defensa sólida. Representación experta en litigios y procesos judiciales, garantizando la defensa técnica de sus intereses.",
+      "Asumimos la defensa penal desde la etapa preliminar hasta el juicio y la ejecución de la sentencia. Partimos de una lectura técnica del caso: fijamos hechos jurídicamente relevantes, formulamos teoría del caso y diseñamos la ruta probatoria (qué debe acreditarse, con qué medios y en qué momento). Preparamos audiencias y escritos, y evaluamos alternativas procesales cuando sean pertinentes, con reserva, rigor y estrategia.",
     href: "#servicios",
     icon: Scale,
-    iconName: "defensa-judicial",
   },
   {
-    title: "Defensa de Lesiones",
-    subtitle: "Protegemos tu futuro tras un accidente",
+    title: "Defensa Disciplinaria",
     description:
-      "Un accidente puede cambiar tu vida. Nosotros documentamos cada detalle, trabajamos con expertos médicos y peritos, y luchamos por la reparación integral que mereces. Acompañamiento especializado en casos de lesiones personales.",
+      "Representamos a servidores públicos y particulares disciplinables ante Procuraduría y oficinas de control interno disciplinario. Analizamos la imputación disciplinaria, la ilicitud sustancial y la estructura del tipo, para construir una teoría del caso disciplinaria sólida. Acompañamos versiones, solicitudes probatorias, descargos, alegatos y recursos, con énfasis en debido proceso y técnica de controversia.",
     href: "#servicios",
-    icon: ShieldCheck,
-    iconName: "defensa-de-lesiones",
+    icon: Gavel,
   },
   {
-    title: "Asesoría Jurídica",
-    subtitle: "Evita problemas antes de que ocurran",
+    title: "Defensa ante Autoridades Administrativas",
     description:
-      "La mejor defensa es la prevención. Analizamos contratos, evaluamos riesgos y verificamos antecedentes antes de que tomes decisiones importantes. Consultoría legal preventiva y correctiva para personas naturales y empresas.",
+      "Atendemos procedimientos sancionatorios ante entidades administrativas: respuesta a requerimientos, descargos, práctica y contradicción de prueba, alegatos y recursos. Enfocamos el trabajo en riesgos, acreditación de hechos y discusión jurídica (tipicidad, culpabilidad, proporcionalidad y motivación). Definimos una hoja de ruta por etapas para tomar decisiones informadas, sin improvisación.",
     href: "#servicios",
-    icon: FileText,
-    iconName: "asesoria-juridica",
+    icon: FileCheck,
   },
   {
-    title: "Investigación Judicial",
-    subtitle: "Recolectamos la evidencia que otros pasan por alto",
+    title: "Defensa Corporativa",
     description:
-      "No confiamos solo en lo que nos dicen. Investigamos, analizamos y presentamos pruebas sólidas. Recolección de elementos materiales probatorios y evidencia física con rigor técnico y metodología profesional.",
+      "Acompañamos a empresas en la prevención y manejo de contingencias comerciales y laborales. En lo comercial: estructuración y revisión contractual, negociación y soporte en decisiones corporativas. En lo laboral: gestión de relaciones de trabajo, políticas internas, terminaciones, trámites ante autoridades y litigios. Priorizamos soluciones viables, alineadas con el riesgo y la operación.",
     href: "#servicios",
-    icon: SearchCheck,
-    iconName: "investigacion-judicial-y-criminal",
+    icon: Briefcase,
   },
   {
-    title: "Seguridad Corporativa",
-    subtitle: "Protege tu empresa antes de que sea tarde",
+    title: "Reorganización Empresarial, Insolvencia y Liquidación",
     description:
-      "Tu empresa es vulnerable si no conoces los riesgos. Investigamos antecedentes, analizamos amenazas y diseñamos estrategias de protección. Gestión de riesgos y cumplimiento normativo en seguridad y salud en el trabajo.",
+      "Asesoramos a empresas y empresarios en escenarios de crisis: diagnóstico, estructuración de estrategia y representación en procesos de reorganización e insolvencia. Acompañamos la negociación con acreedores, la elaboración de acuerdos, el manejo de contingencias y el cumplimiento de cargas durante el trámite. Cuando corresponde, orientamos liquidaciones con enfoque de orden, trazabilidad y protección jurídica del patrimonio.",
     href: "#servicios",
-    icon: Shield,
-    iconName: "Seguridad-laboral",
+    icon: RefreshCw,
   },
   {
-    title: "Contra-Interrogación",
-    subtitle: "Validamos testimonios con precisión forense",
+    title: "Contrainterrogatorio",
     description:
-      "Cada palabra cuenta en un juicio. Preparamos interrogatorios estratégicos, verificamos la veracidad de declaraciones y exponemos inconsistencias. Técnicas avanzadas de litigación oral para la validación de testimonios.",
+      "Diseñamos contrainterrogatorios con enfoque técnico: capítulos, objetivos precisos, control del relato y uso estratégico de declaraciones previas y documentos. Entrenamos la ejecución en audiencia (pregunta corta, control, ritmo, objeciones) para explorar credibilidad, percepción, memoria y sesgos, y para exhibir inconsistencias relevantes a la teoría del caso.",
     href: "#servicios",
     icon: Mic,
-    iconName: "contrainterrogacion",
+  },
+  {
+    title: "Asesoría e Identificación Temprana de Riesgos Penales y Disciplinarios",
+    description:
+      "Acompañamiento preventivo para ordenadores del gasto y equipos con funciones sensibles, especialmente en contratación estatal y gestión administrativa. Identificamos riesgos por acción u omisión, sugerimos controles y soportes (documentación, trazabilidad y justificación), y entregamos recomendaciones prácticas para reducir exposición penal y disciplinaria. Es asesoría estratégica; no reemplaza control interno ni funciones de auditoría.",
+    href: "#servicios",
+    icon: AlertTriangle,
+  },
+  {
+    title: "Asesoría a Empresas del Sector Público y Privado",
+    description:
+      "Consultoría continua o por proyectos para estructurar decisiones y gestionar contingencias. En comercial: contratos, negociación, gobierno corporativo y prevención de disputas. En laboral: cumplimiento, manejo de conflictos, inspecciones, conciliaciones y litigios. El foco es anticipar riesgos y actuar con método, antes de que el problema crezca.",
+    href: "#servicios",
+    icon: Building,
+  },
+  {
+    title: "Investigación Privada",
+    description:
+      "Desarrollamos investigación privada como soporte a la estrategia jurídica. Verificamos información, realizamos entrevistas y toma de versiones, practicamos inspecciones al lugar de los hechos y fijación técnica de escenas (registro y documentación), y reconstruimos líneas de tiempo. También apoyamos la recolección, preservación y análisis de evidencia digital, así como la revisión de áreas de interés para identificar vulnerabilidades en instalaciones físicas. El propósito es aportar insumos útiles para la acreditación probatoria, detectar inconsistencias y fortalecer la preparación del caso con hallazgos trazables y documentados.",
+    href: "#servicios",
+    icon: SearchCheck,
   },
 ];
 
@@ -84,7 +94,5 @@ export const services: Service[] = [
 export const servicesSectionContent = {
   title: "Nuestros Servicios",
   description:
-    "Soluciones integrales en derecho e investigación. Nuestros servicios de Inteligencia Jurídica e Investigación Privada están diseñados para proteger sus intereses y brindarle la tranquilidad que merece.",
-  detailedDescription:
-    "En iPROVA, ofrecemos un portafolio completo de servicios legales e investigativos. Nuestra experiencia en Inteligencia Jurídica nos permite anticipar riesgos y diseñar estrategias preventivas. Nuestros servicios de Investigación Privada incluyen investigación corporativa, análisis de riesgos, verificación de antecedentes y más. Cada servicio está respaldado por nuestro equipo multidisciplinario de abogados especializados.",
+    "Soluciones especializadas en defensa, asesoría e investigación con método, técnica y enfoque estratégico.",
 } as const;

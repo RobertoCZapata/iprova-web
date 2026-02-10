@@ -140,10 +140,11 @@ export function ContactFormSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-extrabold text-primary mb-4">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-primary mb-3">
             Contáctanos
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <div className="h-1 w-24 bg-secondary mx-auto" />
+          <p className="mt-6 text-xl text-gray-600 max-w-2xl mx-auto">
             Estamos aquí para ayudarte. Completa el formulario y nos pondremos
             en contacto contigo lo antes posible.
           </p>
@@ -231,13 +232,13 @@ export function ContactFormSection() {
             <div className="bg-primary rounded-lg p-6 text-white">
               <div className="flex items-center gap-3 mb-3">
                 <CheckCircle2 size={24} />
-                <h4 className="font-bold text-lg">Garantías</h4>
+                <h4 className="font-bold text-lg">Compromisos de servicio</h4>
               </div>
               <ul className="space-y-2 text-sm text-white/90">
-                <li>✓ Respuesta en menos de 24 horas</li>
-                <li>✓ Consulta inicial gratuita</li>
-                <li>✓ Confidencialidad absoluta</li>
-                <li>✓ 20+ años de experiencia</li>
+                <li>✓ Confirmación de recepción del mensaje</li>
+                <li>✓ Tiempo de respuesta estimado: 1 día hábil</li>
+                <li>✓ Confidencialidad y reserva profesional</li>
+                <li>✓ ZAPATA & PEDRAZA: experiencia combinada de más de dos décadas</li>
               </ul>
             </div>
           </motion.div>

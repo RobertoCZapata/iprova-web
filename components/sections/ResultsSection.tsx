@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CheckCircle, TrendingUp, Users, Briefcase } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import { resultsContent } from "@/lib/data";
 
 export function ResultsSection() {
@@ -19,36 +19,48 @@ export function ResultsSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12 lg:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-primary mb-4">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-primary mb-3">
             {resultsContent.title}
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <div className="h-1 w-24 bg-secondary mx-auto" />
+          <p className="mt-6 text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
             {resultsContent.description}
           </p>
         </motion.div>
 
-        {/* Global Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8 mb-12 lg:mb-16">
-          {resultsContent.globalStats.map((stat, index) => {
-            const Icon = stat.icon;
+        {/* Work Indicators */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-12 lg:mb-16">
+          {resultsContent.workIndicators.map((indicator, index) => {
+            const Icon = indicator.icon;
+            // Dividir la descripción para resaltar ZAPATA & PEDRAZA
+            const parts = indicator.description.split(/(ZAPATA & PEDRAZA)/g);
+
             return (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white border border-gray-200 rounded-lg p-6 lg:p-8 text-center hover:shadow-lg transition-shadow"
+                className="bg-white border border-gray-200 rounded-xl p-6 lg:p-8 hover:shadow-xl hover:border-primary/30 transition-all duration-300"
               >
-                <div className="w-12 h-12 lg:w-14 lg:h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Icon className="text-primary" size={24} />
+                <div className="w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl flex items-center justify-center mb-4">
+                  <Icon className="text-primary" size={28} strokeWidth={1.5} />
                 </div>
-                <div className="text-3xl lg:text-4xl font-bold text-primary mb-2">
-                  {stat.number}
-                </div>
-                <div className="text-xs lg:text-sm font-semibold text-gray-600 tracking-wide uppercase">
-                  {stat.label}
-                </div>
+                <h3 className="text-lg lg:text-xl font-bold text-primary mb-3">
+                  {indicator.title}
+                </h3>
+                <p className="text-sm lg:text-base text-gray-700 leading-relaxed">
+                  {parts.map((part, i) =>
+                    part === "ZAPATA & PEDRAZA" ? (
+                      <span key={i} className="text-primary font-bold">
+                        {part}
+                      </span>
+                    ) : (
+                      part
+                    )
+                  )}
+                </p>
               </motion.div>
             );
           })}
@@ -121,10 +133,10 @@ export function ResultsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="bg-primary text-white rounded-xl p-8 lg:p-12 mb-8 lg:mb-12"
+          className="bg-primary text-white rounded-xl p-8 lg:p-12"
         >
           <div className="max-w-4xl mx-auto">
-            <div className="inline-block bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-semibold mb-6">
+            <div className="inline-block bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-semibold mb-6 uppercase tracking-wider">
               CASO DESTACADO
             </div>
 
@@ -171,25 +183,6 @@ export function ResultsSection() {
               </div>
             </div>
           </div>
-        </motion.div>
-
-        {/* CTA Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center"
-        >
-          <motion.a
-            href={resultsContent.cta.href}
-            className="bg-primary text-white px-8 py-4 rounded-sm font-semibold text-base lg:text-lg hover:bg-primary-light hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl inline-flex items-center gap-3 uppercase tracking-wide"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            {resultsContent.cta.label}
-            <span className="text-xl">→</span>
-          </motion.a>
         </motion.div>
       </div>
     </section>

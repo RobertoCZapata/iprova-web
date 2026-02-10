@@ -27,32 +27,46 @@ export function WhyChooseUsSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl font-extrabold text-primary mb-6">
+            <h2 className="text-4xl font-extrabold text-primary mb-3">
               {whyChooseUsContent.title}
             </h2>
+            <div className="h-1 w-24 bg-secondary mb-6" />
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
               {whyChooseUsContent.description}
             </p>
 
             <div className="space-y-4">
-              {whyChooseUsContent.reasons.map((reason, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="flex items-start gap-3"
-                >
-                  <CheckCircle2
-                    className="text-primary flex-shrink-0 mt-1"
-                    size={24}
-                  />
-                  <span className="text-gray-700">
-                    {reason}
-                  </span>
-                </motion.div>
-              ))}
+              {whyChooseUsContent.reasons.map((reason, index) => {
+                // Resaltar ZAPATA & PEDRAZA en azul
+                const parts = reason.split(/(ZAPATA & PEDRAZA)/g);
+
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                    className="flex items-start gap-3"
+                  >
+                    <CheckCircle2
+                      className="text-primary flex-shrink-0 mt-1"
+                      size={24}
+                    />
+                    <span className="text-gray-700">
+                      {parts.map((part, i) =>
+                        part === "ZAPATA & PEDRAZA" ? (
+                          <span key={i} className="text-primary font-bold">
+                            {part}
+                          </span>
+                        ) : (
+                          part
+                        )
+                      )}
+                    </span>
+                  </motion.div>
+                );
+              })}
             </div>
 
             <motion.button

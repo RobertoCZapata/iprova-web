@@ -5,19 +5,21 @@
 
 // Hero Section Content
 export const heroContent = {
-  // Nuevo H1 directo al beneficio (UX Writing optimizado)
+  // Título H1 - Promesa realista y profesional
   title: {
-    main: "No solo te defendemos,",
-    highlight: "encontramos la verdad",
+    main: "No solo te defendemos:",
+    highlight: "investigamos con rigor",
   },
-  // Tagline diferenciador
-  tagline: "Abogados e Investigadores en un solo lugar",
-  // Descripción que elimina ansiedad del cliente
+  // Subtítulo H2
+  tagline: "Abogados e investigadores, en un solo equipo",
+  // Liderazgo - Firma
+  leadership: "liderado por ZAPATA & PEDRAZA",
+  // Descripción detallada del servicio
   description:
-    "No necesitas contratar abogados y peritos por separado. En iPROVA, combinamos defensa jurídica experta con investigación privada profesional. Control total de tu caso, desde el análisis hasta la resolución.",
-  // Beneficio emocional
+    "No necesitas coordinar defensa jurídica e investigación por separado. En iPROVA integramos litigación penal y disciplinaria con investigación privada profesional: verificación de información, entrevistas, análisis documental y digital, gestión y trazabilidad de evidencia y, cuando aporta valor, apoyo pericial. Así construimos una estrategia clara, con decisiones informadas en cada etapa del proceso.",
+  // Frase destacada - Propuesta de valor
   benefit:
-    "Mientras otros solo defienden, nosotros investigamos, analizamos y construimos tu caso con evidencia sólida. Eso es ir más allá.",
+    "Más que promesas: método, evidencia y estrategia.",
   cta: {
     primary: {
       label: "Solicitar Evaluación de Caso",
@@ -30,27 +32,29 @@ export const heroContent = {
   },
 } as const;
 
-// About Us Section Content
+// About Us Section Content - Nuestra Propuesta
 export const aboutUsContent = {
-  title: "Valores Corporativos",
+  title: "Nuestra Propuesta",
   description:
-    "La marca IPROVA trabaja incansablemente el proceso de construcción de su marca, para fortalecer la conexión con sus clientes y empleados, al mismo tiempo que impulsar su reconocimiento.",
+    "iPROVA es una firma de abogados e investigadores privados liderada por sus socios fundadores, ZAPATA & PEDRAZA. Integramos defensa en escenarios sancionatorios (penal, disciplinario, responsabilidad fiscal y derecho administrativo sancionador) con investigación privada profesional para fortalecer la acreditación probatoria y orientar decisiones estratégicas.",
   extendedDescription:
-    "Con más de dos décadas de experiencia en el sector legal colombiano, iPROVA se ha consolidado como una firma líder en Inteligencia Jurídica e Investigación Privada. Nuestro enfoque se basa en la integridad, la confidencialidad y la excelencia en cada caso que manejamos. Especializados en Investigación Privada corporativa y personal, así como en servicios de Inteligencia Jurídica estratégica, trabajamos con empresas, individuos y organizaciones que requieren soluciones legales e investigativas de alto nivel. Nuestro equipo multidisciplinario combina conocimientos legales profundos con técnicas avanzadas de investigación, garantizando resultados excepcionales en cada proyecto.",
+    "Para nosotros, Inteligencia Jurídica es la capacidad de traducir un problema complejo en una ruta técnica: delimitar hechos jurídicamente relevantes, estructurar teoría del caso, priorizar riesgos y ejecutar un plan de investigación y litigación con método. Combinamos criterio experto con herramientas tecnológicas —incluida inteligencia artificial como apoyo— siempre bajo dirección profesional y con estándares de confidencialidad.",
+  complementaryFocus:
+    "Complementamos este enfoque con un área empresarial en derecho comercial y laboral, orientada a prevenir conflictos, gestionar riesgos y proteger el patrimonio y la operación de nuestros clientes.",
 } as const;
 
 // Why Choose Us Section Content
 export const whyChooseUsContent = {
-  title: "¿Por Qué Elegir iPROVA?",
+  title: "¿Por qué elegir iPROVA?",
   description:
-    "En iPROVA ofrecemos asesoría legal integral, investigación especializada y defensa judicial para empresas e individuos. Somos abogados comprometidos en ir más allá de tus expectativas.",
+    "En iPROVA integramos defensa jurídica e investigación privada para construir estrategias basadas en teoría del caso, hechos jurídicamente relevantes y acreditación probatoria. Trabajamos con método, técnica y comunicación clara de escenarios.",
   reasons: [
-    "Equipo multidisciplinario de abogados e investigadores trabajando en conjunto",
-    "Más de 20 años de experiencia en Inteligencia Jurídica e Investigación Privada",
-    "Enfoque integral: desde la investigación hasta la defensa judicial",
-    "Confidencialidad absoluta y discreción en cada caso",
-    "Tecnología de última generación para análisis forense y digital",
-    "Resultados comprobados: 95% de casos exitosos",
+    "Equipo integrado de abogados e investigadores trabajando en una sola estrategia",
+    "Liderazgo de socios fundadores: ZAPATA & PEDRAZA (más de dos décadas de experiencia combinada)",
+    "Teoría del caso: hechos relevantes, hipótesis y ruta probatoria desde el inicio",
+    "Confidencialidad y discreción con reserva profesional y protocolos de manejo de información",
+    "Investigación y análisis digital como apoyo técnico (cuando aporta valor al caso)",
+    "Reportes claros: escenarios, riesgos y próximos pasos, sin promesas de resultado",
   ],
   floatingCard: {
     value: "100%",

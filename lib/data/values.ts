@@ -3,30 +3,35 @@
  * Valores corporativos y de confianza de iPROVA
  */
 
-import { Scale, Gavel, Shield, Heart, Target, Award, type LucideIcon } from "lucide-react";
+import { Scale, Lock, Network, FileSearch, Heart, Target, Award, type LucideIcon } from "lucide-react";
 
-// Trust Values (Libertad, Defensa, Protección)
-export interface TrustValue {
+// Core Principles - Principios Fundamentales (4 tarjetas principales)
+export interface CorePrinciple {
   title: string;
   description: string;
   icon: LucideIcon;
 }
 
-export const trustValues: TrustValue[] = [
+export const corePrinciples: CorePrinciple[] = [
   {
-    title: "Libertad",
-    description: "Protegemos sus derechos fundamentales con integridad.",
+    title: "Integridad",
+    description: "Actuamos con honestidad, independencia y transparencia. Delimitamos lo posible en derecho y lo comunicamos con claridad, sin promesas de resultado.",
     icon: Scale,
   },
   {
-    title: "Defensa",
-    description: "Representación legal robusta y estratégica.",
-    icon: Gavel,
+    title: "Confidencialidad",
+    description: "Protegemos tu información con reserva profesional y protocolos de manejo de datos. La confianza se cuida en cada conversación, documento y actuación.",
+    icon: Lock,
   },
   {
-    title: "Protección",
-    description: "Seguridad integral para usted y su patrimonio.",
-    icon: Shield,
+    title: "Teoría del caso y hechos relevantes",
+    description: "Identificamos los hechos jurídicamente relevantes y construimos una teoría del caso coherente: qué ocurrió, qué se puede probar y qué consecuencias jurídicas se discuten.",
+    icon: Network,
+  },
+  {
+    title: "Método, técnica y acreditación probatoria",
+    description: "Trabajamos con método: verificamos, contrastamos y organizamos evidencia para la acreditación (sustento) de los hechos. Técnica jurídica y rigor probatorio en cada etapa.",
+    icon: FileSearch,
   },
 ] as const;
 

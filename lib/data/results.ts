@@ -1,14 +1,14 @@
 /**
  * Results Section Content
- * Contenido de la sección de resultados y casos destacados
+ * Contenido de la sección de indicadores de trabajo
  */
 
-import { TrendingUp, CheckCircle, Briefcase, Users, type LucideIcon } from "lucide-react";
+import { Briefcase, Users, FileCheck, RotateCcw, type LucideIcon } from "lucide-react";
 
-export interface GlobalStat {
+export interface WorkIndicator {
   icon: LucideIcon;
-  number: string;
-  label: string;
+  title: string;
+  description: string;
 }
 
 export interface AreaResult {
@@ -29,31 +29,31 @@ export interface FeaturedCase {
 }
 
 export const resultsContent = {
-  title: "Nuestros Resultados Hablan por Sí Solos",
+  title: "Indicadores de Trabajo",
   description:
-    "En iPROVA nos medimos por resultados. Cada caso es una oportunidad para demostrar nuestro compromiso con la excelencia legal y la defensa inquebrantable de nuestros clientes.",
-  globalStats: [
-    {
-      icon: TrendingUp,
-      number: "500+",
-      label: "CASOS GANADOS",
-    },
-    {
-      icon: CheckCircle,
-      number: "93%",
-      label: "TASA DE ÉXITO",
-    },
+    "Medimos nuestra gestión por método, oportunidad y calidad técnica.",
+  workIndicators: [
     {
       icon: Briefcase,
-      number: "$25M+",
-      label: "GANADO PARA CLIENTES",
+      title: "Casos gestionados",
+      description: "Defensa e investigación en asuntos penales, disciplinarios y sancionatorios.",
     },
     {
       icon: Users,
-      number: "20+",
-      label: "AÑOS DE EXPERIENCIA",
+      title: "Experiencia combinada",
+      description: "ZAPATA & PEDRAZA: más de dos décadas de trayectoria acumulada.",
     },
-  ] as GlobalStat[],
+    {
+      icon: FileCheck,
+      title: "Gestión probatoria",
+      description: "Plan de acreditación, trazabilidad documental y preparación de audiencias.",
+    },
+    {
+      icon: RotateCcw,
+      title: "Clientes recurrentes",
+      description: "Relaciones de largo plazo basadas en confianza y consistencia profesional.",
+    },
+  ] as WorkIndicator[],
   areaResults: [
     {
       title: "Defensa Judicial",
@@ -73,14 +73,14 @@ export const resultsContent = {
     },
   ] as AreaResult[],
   featuredCase: {
-    title: "Ejecutivo Acusado de Fraude por $2.5M",
+    title: "Ejecutivo investigado por presunto fraude financiero",
     description:
-      "Un alto ejecutivo enfrentaba cargos por presunto fraude financiero. A través de una investigación exhaustiva y defensa estratégica, logramos demostrar su inocencia.",
+      "El cliente enfrentaba una investigación compleja con alto impacto reputacional. Diseñamos teoría del caso, delimitamos hechos jurídicamente relevantes y estructuramos un plan de acreditación probatoria. La defensa se apoyó en análisis documental y verificación de información para controvertir la hipótesis de la contraparte y preparar la audiencia.",
     result: "RESULTADO",
     resultDetail: "Cargos completamente desestimados - Libertad total",
     testimonial:
-      "Gracias a iPROVA recuperé mi libertad y mi reputación. Sin ustedes, hoy estaría preso injustamente. Su profesionalismo salvó mi vida.",
-    client: "Cliente iPROVA",
+      "Me ayudaron a entender el caso, a organizar la evidencia y a tomar decisiones con claridad. Su método y discreción marcaron la diferencia.",
+    client: "Cliente iPROVA (autorizado)",
     year: "2025",
   } as FeaturedCase,
   cta: {

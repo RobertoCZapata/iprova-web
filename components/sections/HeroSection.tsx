@@ -11,8 +11,8 @@ export function HeroSection() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          alt="Modern law office with wooden panels"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuASdxDyikQZldrmsqA8yC2ml_Inw7ydkzsWVLIYPuhGu6TNoWoEO_x0J2sLHicNtQPaqykYEEVX6cr1bfLjWwbpwCsLI279G_EtkVY1graIVvgGO8Bi9oMXasm0DSR-vFESBf4EL8GJUIa9xlCPD58-wgLqcht85jIkhEMFc_CFE2E_c5JpJ7yjgm09emIURwx-wWmNFnZtuvSkynffMS1wkGLcP4eL6De2k_LJfAiUjk39rP9fJ2aWTPsfzdRpBaxXrGKgv73_RWw"
+          alt="Oficina iPROVA - Abogados e Investigadores en Santander"
+          src="/images/heroSectionImage.png"
           fill
           className="object-cover object-center"
           priority
@@ -34,9 +34,16 @@ export function HeroSection() {
                 {heroContent.title.highlight}
               </span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-200 font-semibold mb-6 drop-shadow-md">
+            <p className="text-xl md:text-2xl text-gray-200 font-semibold mb-4 drop-shadow-md">
               {heroContent.tagline}
             </p>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="h-[2px] w-12 bg-secondary" />
+              <span className="text-white text-sm md:text-base font-bold tracking-widest uppercase whitespace-nowrap">
+                {heroContent.leadership}
+              </span>
+              <div className="h-[2px] w-12 bg-secondary" />
+            </div>
             <p className="mt-6 text-gray-100 text-lg md:text-xl font-medium max-w-2xl mb-4 drop-shadow-md leading-relaxed">
               {heroContent.description}
             </p>
