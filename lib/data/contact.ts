@@ -10,11 +10,11 @@ export const contactInfo = {
     neighborhood: "Cañaveral - Floridablanca",
     city: "Santander - Colombia",
     coordinates: {
-      lat: 7.0620,
-      lng: -73.0864,
+      lat: 7.070413,
+      lng: -73.103396,
     },
     // URL de Google Maps con coordenadas exactas
-    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=7.0620,-73.0864",
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=7.070413,-73.103396",
   },
   phones: ["+57 317 368 4975", "+57 318 220 0086"],
   emails: {

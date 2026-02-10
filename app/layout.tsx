@@ -114,8 +114,8 @@ export default function RootLayout({
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: "7.0620",
-      longitude: "-73.0864",
+      latitude: "7.070413",
+      longitude: "-73.103396",
     },
     areaServed: [
       {
