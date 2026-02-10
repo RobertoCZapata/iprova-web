@@ -90,7 +90,7 @@ export function WhyChooseUsSection() {
             <div className="relative rounded-lg overflow-hidden shadow-2xl">
               <Image
                 src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80"
-                alt="Equipo profesional de abogados"
+                alt="Equipo jurídico iPROVA - Abogados especialistas en derecho penal y disciplinario en Bucaramanga, Santander"
                 width={800}
                 height={500}
                 className="w-full h-[500px] object-cover"
