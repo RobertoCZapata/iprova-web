@@ -10,7 +10,7 @@ export function TeamSection() {
     <section className="py-24 bg-white" id="equipo">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <span className="text-secondary font-bold tracking-widest uppercase text-sm mb-2 block">
+          <span className="text-gray-700 font-bold tracking-widest uppercase text-sm mb-2 block">
             Profesionales
           </span>
           <h2 className="text-4xl font-extrabold text-primary tracking-tight mb-3">
@@ -54,7 +54,7 @@ export function TeamSection() {
                       {member.title}
                     </p>
                     <div className="mb-4 flex-1">
-                      <span className="text-xs font-semibold text-secondary uppercase tracking-wider">
+                      <span className="text-xs font-semibold text-gray-700 uppercase tracking-wider">
                         Enfoque
                       </span>
                       <p className="text-sm text-gray-700 mt-1 min-h-[2.5rem]">
@@ -118,7 +118,7 @@ export function TeamSection() {
                       {member.title}
                     </p>
                     <div className="mb-4 flex-1">
-                      <span className="text-xs font-semibold text-secondary uppercase tracking-wider">
+                      <span className="text-xs font-semibold text-gray-700 uppercase tracking-wider">
                         Enfoque
                       </span>
                       <p className="text-sm text-gray-700 mt-1 min-h-[2.5rem]">

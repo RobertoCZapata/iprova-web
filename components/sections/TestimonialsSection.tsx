@@ -6,7 +6,7 @@ export function TestimonialsSection() {
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <span className="text-secondary font-bold tracking-widest uppercase text-sm mb-2 block">
+          <span className="text-gray-700 font-bold tracking-widest uppercase text-sm mb-2 block">
             Prueba Social
           </span>
           <h2 className="text-3xl md:text-4xl font-extrabold text-primary mb-4">

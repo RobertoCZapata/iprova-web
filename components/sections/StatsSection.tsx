@@ -9,7 +9,7 @@ export function StatsSection() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-12">
-          <span className="text-secondary font-bold tracking-widest uppercase text-sm mb-2 block">
+          <span className="text-gray-300 font-bold tracking-widest uppercase text-sm mb-2 block">
             Resultados
           </span>
           <h2 className="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight">
@@ -28,7 +28,7 @@ export function StatsSection() {
               >
                 <div className="flex justify-center mb-4">
                   <div className="p-3 bg-secondary/20 rounded-full group-hover:bg-secondary/30 transition-colors duration-300">
-                    <Icon className="h-6 w-6 text-secondary" />
+                    <Icon className="h-6 w-6 text-gray-300" />
                   </div>
                 </div>
                 <div className="mb-2">
@@ -36,7 +36,7 @@ export function StatsSection() {
                     {stat.value}
                   </span>
                   {stat.suffix && (
-                    <span className="text-2xl md:text-3xl font-bold text-secondary ml-1">
+                    <span className="text-2xl md:text-3xl font-bold text-gray-300 ml-1">
                       {stat.suffix}
                     </span>
                   )}

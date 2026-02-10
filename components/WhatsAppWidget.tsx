@@ -102,7 +102,7 @@ export default function WhatsAppWidget() {
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-[#00184A]/95">
               <div>
-                <p className="text-xs font-semibold tracking-[0.18em] uppercase text-secondary">
+                <p className="text-xs font-semibold tracking-[0.18em] uppercase text-gray-300">
                   iPROVA Concierge
                 </p>
                 <div className="mt-1 flex items-center space-x-2">
@@ -133,7 +133,7 @@ export default function WhatsAppWidget() {
                       )}
                     >
                       <div className="flex items-center gap-3">
-                        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-secondary">
+                        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-gray-300">
                           {service.icon}
                         </div>
                         <span className="text-xs font-medium tracking-wide uppercase">

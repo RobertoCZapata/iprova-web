@@ -45,7 +45,7 @@ export function SectionHeader({
   return (
     <div className={`${centered ? "text-center" : ""} ${className}`}>
       {subtitle && (
-        <span className="text-secondary font-bold tracking-widest uppercase text-sm mb-2 block">
+        <span className="text-gray-700 font-bold tracking-widest uppercase text-sm mb-2 block">
           {subtitle}
         </span>
       )}
