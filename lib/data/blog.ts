@@ -78,7 +78,7 @@ Muchas personas piensan que "no tienen nada que ocultar" y hablan libremente con
 La defensa penal requiere experiencia, estrategia y conocimiento profundo del sistema judicial. En iPROVA contamos con más de 20 años defendiendo exitosamente casos complejos.
 
 **¿Necesitas asesoría inmediata?** Contáctanos ahora.`,
-    featuredImage: "/images/blog/defensa-penal-2026.jpg",
+    featuredImage: "/images/blog/defensa-penal-2026.png",
     author: authors.henryZapata,
     category: blogCategories.penal,
     tags: ["defensa penal", "derechos", "proceso judicial", "colombia"],
@@ -124,7 +124,7 @@ La investigación privada corporativa es una herramienta legal poderosa para pro
 - Violación de acuerdos de confidencialidad
 
 ...`,
-    featuredImage: "/images/blog/investigacion-privada.jpg",
+    featuredImage: "/images/blog/investigacion-privada.png",
     author: authors.javierPedraza,
     category: blogCategories.investigacion,
     tags: ["investigación privada", "empresas", "seguridad corporativa"],
@@ -153,7 +153,7 @@ Un despido es injustificado cuando el empleador termina el contrato sin una caus
 3. **Prestaciones sociales**: Cesantías, prima, vacaciones
 
 ...`,
-    featuredImage: "/images/blog/despido-injustificado.jpg",
+    featuredImage: "/images/blog/despido-injustificado.png",
     author: authors.hernanZapata,
     category: blogCategories.laboral,
     tags: ["derecho laboral", "despido", "indemnización", "colombia"],

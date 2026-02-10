@@ -43,7 +43,7 @@ export const authors: Record<string, Author> = {
     slug: "hernan-zapata",
     role: "Asociado - Derecho Comercial y Laboral",
     bio: "Especialista en derecho comercial, laboral y derecho de familia. Asesor estratégico en contratación empresarial y relaciones laborales con enfoque preventivo.",
-    image: "/images/team/hernan-zapata.jpg",
+    image: "/images/team/hernan-dario.webp",
     specialties: [
       "Derecho Comercial",
       "Derecho Laboral",
