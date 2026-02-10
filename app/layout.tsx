@@ -178,6 +178,13 @@ export default function RootLayout({
         <link rel="icon" href="/favicon-32x32.png" sizes="32x32" />
         <link rel="icon" href="/favicon-16x16.png" sizes="16x16" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        {/* Preload critical hero image for LCP optimization */}
+        <link
+          rel="preload"
+          as="image"
+          href="/images/heroSectionImage.webp"
+          fetchPriority="high"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
