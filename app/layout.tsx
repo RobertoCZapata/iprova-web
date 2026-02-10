@@ -14,9 +14,9 @@ const montserrat = Montserrat({
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://iprova-web.vercel.app";
 
 export const metadata: Metadata = {
-  title: "iPROVA - Abogados e Investigadores | Inteligencia Jurídica e Investigación Privada",
+  title: "iPROVA | Abogados Penalistas Bucaramanga - ZAPATA & PEDRAZA",
   description:
-    "Superar lo hecho es ir más allá. iPROVA ofrece servicios de Inteligencia Jurídica e Investigación Privada. Abogados especializados en defensa penal, investigación corporativa y seguridad. 20+ años de experiencia, 95% de casos exitosos.",
+    "Abogados penalistas e investigadores privados en Bucaramanga. ZAPATA & PEDRAZA: 20+ años de experiencia en defensa penal e investigación.",
   keywords: [
     "abogados colombia",
     "abogados bucaramanga",
@@ -53,9 +53,9 @@ export const metadata: Metadata = {
     locale: "es_CO",
     url: siteUrl,
     siteName: "iPROVA - Abogados e Investigadores",
-    title: "iPROVA - Abogados e Investigadores | Inteligencia Jurídica e Investigación Privada",
+    title: "iPROVA | Abogados Penalistas Bucaramanga - ZAPATA & PEDRAZA",
     description:
-      "Superar lo hecho es ir más allá. iPROVA ofrece servicios de Inteligencia Jurídica e Investigación Privada. Abogados especializados con 20+ años de experiencia.",
+      "Abogados penalistas e investigadores privados en Bucaramanga. ZAPATA & PEDRAZA: 20+ años de experiencia en defensa penal e investigación.",
     images: [
       {
         url: `${siteUrl}/images/iProva-logo.png`,
@@ -67,9 +67,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "iPROVA - Abogados e Investigadores",
+    title: "iPROVA | Abogados Penalistas Bucaramanga",
     description:
-      "Inteligencia Jurídica e Investigación Privada. 20+ años de experiencia, 95% de casos exitosos.",
+      "Abogados penalistas e investigadores privados. ZAPATA & PEDRAZA: 20+ años de experiencia en Bucaramanga.",
     images: [`${siteUrl}/images/iProva-logo.png`],
   },
   icons: {

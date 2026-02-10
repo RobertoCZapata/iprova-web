@@ -43,7 +43,10 @@ export function CtaSection() {
           </h2>
           <div className="h-1 w-24 bg-white/40 mx-auto" />
           <p className="mt-6 text-xl text-white/90 mb-12 max-w-2xl mx-auto leading-relaxed">
-            {ctaContent.description}
+            {ctaContent.description} Conoce más sobre{" "}
+            <a href="#servicios" className="text-white font-bold hover:text-white/80 hover:underline">
+              nuestros servicios
+            </a>.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">

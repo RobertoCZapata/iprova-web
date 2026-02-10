@@ -56,9 +56,13 @@ export function WhyChooseUsSection() {
                     <span className="text-gray-700">
                       {parts.map((part, i) =>
                         part === "ZAPATA & PEDRAZA" ? (
-                          <span key={i} className="text-primary font-bold">
+                          <a
+                            key={i}
+                            href="#equipo"
+                            className="text-primary font-bold hover:text-primary-dark hover:underline"
+                          >
                             {part}
-                          </span>
+                          </a>
                         ) : (
                           part
                         )

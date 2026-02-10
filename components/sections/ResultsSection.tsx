@@ -24,7 +24,14 @@ export function ResultsSection() {
           </h2>
           <div className="h-1 w-24 bg-secondary mx-auto" />
           <p className="mt-6 text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            {resultsContent.description}
+            {resultsContent.description}{" "}
+            <a href="#equipo" className="text-primary hover:text-primary-dark font-semibold hover:underline">
+              Conoce a nuestro equipo
+            </a>{" "}
+            y{" "}
+            <a href="#servicios" className="text-primary hover:text-primary-dark font-semibold hover:underline">
+              nuestros servicios
+            </a>.
           </p>
         </motion.div>
 

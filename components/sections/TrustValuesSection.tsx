@@ -13,7 +13,14 @@ export function TrustValuesSection() {
             <div className="h-1 w-24 bg-secondary mx-auto" />
           </div>
           <p className="mt-6 text-lg text-gray-600 max-w-2xl mx-auto">
-            Los pilares que guían nuestro trabajo y garantizan la excelencia en cada caso
+            Los pilares que guían{" "}
+            <a href="#servicios" className="text-primary hover:text-primary-dark font-semibold hover:underline">
+              nuestro trabajo
+            </a>{" "}
+            y garantizan la excelencia en cada caso. Conoce más sobre{" "}
+            <a href="#nosotros" className="text-primary hover:text-primary-dark font-semibold hover:underline">
+              nuestra propuesta
+            </a>.
           </p>
         </div>
 
