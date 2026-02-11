@@ -182,7 +182,7 @@ export default function RootLayout({
         <link
           rel="preload"
           as="image"
-          href="/images/heroSectionImage.webp"
+          href="/images/heroSectionImage.png"
           fetchPriority="high"
         />
         <script

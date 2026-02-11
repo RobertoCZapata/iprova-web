@@ -23,3 +23,9 @@
   }
 }
 
+@layer utilities {
+  .hero-image-position {
+    object-position: 65% center;
+  }
+}
+

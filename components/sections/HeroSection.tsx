@@ -12,9 +12,9 @@ export function HeroSection() {
       <div className="absolute inset-0 z-0">
         <Image
           alt="Oficina iPROVA Bucaramanga - Abogados Penalistas y Detectives Privados en Santander Colombia - ZAPATA & PEDRAZA"
-          src="/images/heroSectionImage.webp"
+          src="/images/heroSectionImage.png"
           fill
-          className="object-cover object-center"
+          className="object-cover hero-image-position"
           priority
           fetchPriority="high"
           quality={90}
