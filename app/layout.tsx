@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
-import WhatsAppWidget from "@/components/WhatsAppWidget";
+import { ConditionalWidgets } from "@/components/ConditionalWidgets";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { Header } from "@/components/sections/Header";
 import { SessionProvider } from "@/components/providers/SessionProvider";
@@ -196,7 +196,7 @@ export default function RootLayout({
         <SessionProvider>
           <Header />
           {children}
-          <WhatsAppWidget />
+          <ConditionalWidgets />
           <GoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || ""} />
         </SessionProvider>
       </body>
