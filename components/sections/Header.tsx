@@ -126,7 +126,7 @@ export function Header() {
             {status === "authenticated" && session?.user?.role === "admin" ? (
               <>
                 <Link
-                  href="/admin/blog"
+                  href="/admin"
                   className="flex items-center space-x-2 text-gray-700 hover:text-primary transition-colors font-medium px-3 py-2 rounded-sm hover:bg-gray-50"
                   aria-label="Panel de Administración"
                 >
@@ -239,7 +239,7 @@ export function Header() {
             {status === "authenticated" && session?.user?.role === "admin" ? (
               <div className="mt-4 pt-4 border-t border-gray-200 space-y-2">
                 <Link
-                  href="/admin/blog"
+                  href="/admin"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="flex items-center space-x-2 w-full text-left py-2 px-3 text-gray-800 hover:text-primary hover:bg-primary/5 rounded transition-all duration-200 font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset"
                   aria-label="Panel de Administración"

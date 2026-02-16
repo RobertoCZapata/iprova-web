@@ -31,7 +31,7 @@ export function LoginForm() {
       }
 
       // Login exitoso
-      router.push("/admin/blog");
+      router.push("/admin");
       router.refresh();
     } catch (error) {
       setError("Error al iniciar sesión. Intenta nuevamente.");
