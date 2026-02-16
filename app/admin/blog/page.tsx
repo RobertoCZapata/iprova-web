@@ -1,15 +1,17 @@
 "use client";
 
 import { useSession, signOut } from "next-auth/react";
-import { Button } from "@/components/ui/Button";
 import { redirect } from "next/navigation";
+import Link from "next/link";
+import { Button } from "@/components/ui/Button";
+import { ArrowLeft, FileText, Wrench } from "lucide-react";
 
 export default function AdminBlogPage() {
   const { data: session, status } = useSession();
 
   if (status === "loading") {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
           <p className="text-gray-600">Cargando...</p>
@@ -28,13 +30,19 @@ export default function AdminBlogPage() {
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
+            <div className="flex items-center space-x-4">
+              <Link
+                href="/admin"
+                className="flex items-center space-x-2 text-gray-600 hover:text-primary transition-colors"
+              >
+                <ArrowLeft size={20} />
+                <span className="text-sm font-medium">Volver al Dashboard</span>
+              </Link>
+            </div>
             <div>
               <h1 className="text-2xl font-bold text-gray-900">
-                Panel de Administración - Blog
+                Gestión de Artículos
               </h1>
-              <p className="text-sm text-gray-600 mt-1">
-                Bienvenido, {session?.user?.name}
-              </p>
             </div>
             <Button
               onClick={() => signOut({ callbackUrl: "/" })}
@@ -48,77 +56,140 @@ export default function AdminBlogPage() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="bg-white rounded-lg shadow p-6">
-          <div className="mb-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-2">
-              Sistema de Blog
-            </h2>
-            <p className="text-gray-600">
-              Administración de artículos del blog iPROVA
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-xl p-12 text-center border border-gray-100">
+          {/* Animated Icon */}
+          <div className="relative inline-block mb-8">
+            <div className="absolute inset-0 bg-primary/10 rounded-full blur-2xl animate-pulse"></div>
+            <div className="relative inline-flex items-center justify-center w-32 h-32 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full">
+              <FileText size={60} className="text-primary" />
+              <div className="absolute -bottom-2 -right-2 bg-yellow-500 rounded-full p-2 shadow-lg animate-bounce">
+                <Wrench size={20} className="text-white" />
+              </div>
+            </div>
+          </div>
+
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            Módulo en Construcción
+          </h2>
+
+          <div className="max-w-2xl mx-auto mb-8">
+            <p className="text-xl text-gray-600 mb-4">
+              Estamos trabajando en el sistema de gestión de artículos para el blog
+            </p>
+            <p className="text-gray-500">
+              Este módulo incluirá un editor completo para crear y publicar contenido legal educativo
             </p>
           </div>
 
-          {/* Success Message */}
-          <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
-            <div className="flex">
-              <div className="flex-shrink-0">
-                <svg
-                  className="h-5 w-5 text-green-400"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+          {/* Features Preview */}
+          <div className="grid md:grid-cols-2 gap-4 max-w-3xl mx-auto mb-10">
+            <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 border border-gray-200">
+              <div className="flex items-start space-x-3">
+                <div className="flex-shrink-0">
+                  <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                    <span className="text-primary font-bold">✓</span>
+                  </div>
+                </div>
+                <div className="text-left">
+                  <h4 className="font-semibold text-gray-900 mb-1">Editor Visual</h4>
+                  <p className="text-sm text-gray-600">Markdown con vista previa en tiempo real</p>
+                </div>
               </div>
-              <div className="ml-3">
-                <h3 className="text-sm font-medium text-green-800">
-                  ✓ Autenticación Exitosa
-                </h3>
-                <div className="mt-2 text-sm text-green-700">
-                  <p>El sistema de autenticación está funcionando correctamente.</p>
-                  <p className="mt-1">
-                    Usuario: <strong>{session?.user?.email}</strong>
-                  </p>
-                  <p>
-                    Rol: <strong>{session?.user?.role}</strong>
-                  </p>
+            </div>
+
+            <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 border border-gray-200">
+              <div className="flex items-start space-x-3">
+                <div className="flex-shrink-0">
+                  <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                    <span className="text-primary font-bold">✓</span>
+                  </div>
+                </div>
+                <div className="text-left">
+                  <h4 className="font-semibold text-gray-900 mb-1">Gestión de Imágenes</h4>
+                  <p className="text-sm text-gray-600">Upload y optimización automática</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 border border-gray-200">
+              <div className="flex items-start space-x-3">
+                <div className="flex-shrink-0">
+                  <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                    <span className="text-primary font-bold">✓</span>
+                  </div>
+                </div>
+                <div className="text-left">
+                  <h4 className="font-semibold text-gray-900 mb-1">SEO Optimizado</h4>
+                  <p className="text-sm text-gray-600">Metadatos y slugs automáticos</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 border border-gray-200">
+              <div className="flex items-start space-x-3">
+                <div className="flex-shrink-0">
+                  <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                    <span className="text-primary font-bold">✓</span>
+                  </div>
+                </div>
+                <div className="text-left">
+                  <h4 className="font-semibold text-gray-900 mb-1">Categorización</h4>
+                  <p className="text-sm text-gray-600">Etiquetas y categorías flexibles</p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Feature Coming Soon */}
-          <div className="text-center py-12">
-            <svg
-              className="mx-auto h-12 w-12 text-gray-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-              />
-            </svg>
-            <h3 className="mt-2 text-sm font-medium text-gray-900">
-              Fase 1 Completada
-            </h3>
-            <p className="mt-1 text-sm text-gray-500">
-              El sistema de autenticación está listo. El CRUD de blog se implementará en la Fase 2.
-            </p>
-            <div className="mt-6">
-              <Button variant="primary" size="md" disabled>
-                Crear Artículo (Próximamente)
-              </Button>
+          {/* Priority Notice */}
+          <div className="bg-blue-50 border-l-4 border-blue-500 rounded-lg p-6 max-w-2xl mx-auto mb-8">
+            <div className="flex items-start">
+              <div className="flex-shrink-0">
+                <svg className="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div className="ml-3 text-left">
+                <h3 className="text-sm font-semibold text-blue-900 mb-1">
+                  Prioridad Actual: Sistema de Casos
+                </h3>
+                <p className="text-sm text-blue-800">
+                  Nos estamos enfocando primero en el sistema de gestión de casos legales,
+                  que es el core del negocio. El módulo de blog se implementará en la Fase 2.
+                </p>
+              </div>
             </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Link href="/admin">
+              <Button variant="primary" size="lg" className="min-w-[200px]">
+                Volver al Dashboard
+              </Button>
+            </Link>
+            <Link href="/admin/casos">
+              <Button variant="outline" size="lg" className="min-w-[200px]">
+                Ir a Gestión de Casos
+              </Button>
+            </Link>
+          </div>
+
+          {/* Blog Public Link */}
+          <div className="mt-8 pt-8 border-t border-gray-200">
+            <p className="text-sm text-gray-500 mb-2">
+              Mientras tanto, el blog público sigue funcionando
+            </p>
+            <Link
+              href="/blog"
+              target="_blank"
+              className="text-primary hover:text-primary-light font-medium text-sm inline-flex items-center space-x-1"
+            >
+              <span>Ver Blog Público</span>
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </Link>
           </div>
         </div>
       </main>
