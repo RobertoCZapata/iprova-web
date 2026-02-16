@@ -54,29 +54,29 @@ export function Header() {
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <div className="flex items-center">
-            <button
-              onClick={() => scrollToSection("inicio")}
+            <Link
+              href="/"
               className="focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded"
               aria-label="iPROVA - Ir al inicio"
             >
               <LogoiProva
                 width={240}
                 height={75}
-                className="h-16 md:h-20 w-auto transition-all duration-300 brightness-0"
+                className="h-16 md:h-20 w-auto transition-all duration-300"
               />
-            </button>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8" role="navigation" aria-label="Navegación principal">
-            <button
-              onClick={() => scrollToSection("inicio")}
+            <Link
+              href="/"
               className="relative text-gray-800 hover:text-primary transition-colors font-medium group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded px-2 py-1"
               aria-label="Ir a Inicio"
             >
               Inicio
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" aria-hidden="true"></span>
-            </button>
+            </Link>
             <button
               onClick={() => scrollToSection("servicios")}
               className="relative text-gray-800 hover:text-primary transition-colors font-medium group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded px-2 py-1"
@@ -150,13 +150,14 @@ export function Header() {
             role="navigation"
             aria-label="Navegación móvil"
           >
-            <button
-              onClick={() => scrollToSection("inicio")}
+            <Link
+              href="/"
+              onClick={() => setIsMobileMenuOpen(false)}
               className="block w-full text-left py-2 px-3 text-gray-800 hover:text-primary hover:bg-primary/5 rounded transition-all duration-200 font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset"
               aria-label="Ir a Inicio"
             >
               Inicio
-            </button>
+            </Link>
             <button
               onClick={() => scrollToSection("servicios")}
               className="block w-full text-left py-2 px-3 text-gray-800 hover:text-primary hover:bg-primary/5 rounded transition-all duration-200 font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset"

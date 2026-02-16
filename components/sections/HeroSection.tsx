@@ -28,9 +28,6 @@ export function HeroSection() {
         <div className="flex flex-col lg:flex-row items-center">
           {/* Text Content */}
           <div className="w-full lg:w-3/5 text-left">
-            <div className="inline-block px-3 py-1 border border-white text-white text-xs font-bold tracking-widest uppercase mb-6 rounded-sm bg-primary/60 backdrop-blur-sm">
-              Abogados e Investigadores
-            </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight mb-4 drop-shadow-lg">
               {heroContent.title.main}{" "}
               <span className="text-gray-200">

@@ -3,6 +3,7 @@ import { Montserrat } from "next/font/google";
 import "./globals.css";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
+import { Header } from "@/components/sections/Header";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -191,6 +192,7 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans">
+        <Header />
         {children}
         <WhatsAppWidget />
         <GoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || ""} />
