@@ -2,12 +2,14 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User, LogOut } from "lucide-react";
 import { LogoiProva } from "@/components/ui/LogoiProva";
+import { useSession, signOut } from "next-auth/react";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { data: session, status } = useSession();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -119,15 +121,46 @@ export function Header() {
             </button>
           </nav>
 
-          {/* CTA Button Desktop */}
-          <div className="hidden md:block">
-            <button
-              onClick={() => scrollToSection("contacto")}
-              className="bg-primary text-white px-6 py-2.5 rounded-sm hover:bg-primary-light hover:shadow-lg transform hover:scale-105 transition-all duration-300 font-semibold uppercase tracking-wide focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary"
-              aria-label="Agendar Consulta Legal"
-            >
-              Agendar Consulta
-            </button>
+          {/* CTA Buttons Desktop */}
+          <div className="hidden md:flex items-center space-x-4">
+            {status === "authenticated" && session?.user?.role === "admin" ? (
+              <>
+                <Link
+                  href="/admin/blog"
+                  className="flex items-center space-x-2 text-gray-700 hover:text-primary transition-colors font-medium px-3 py-2 rounded-sm hover:bg-gray-50"
+                  aria-label="Panel de Administración"
+                >
+                  <User size={18} />
+                  <span className="text-sm">{session.user.name?.split(" ")[0]}</span>
+                </Link>
+                <button
+                  onClick={() => signOut({ callbackUrl: "/" })}
+                  className="flex items-center space-x-2 text-gray-700 hover:text-red-600 transition-colors font-medium px-3 py-2 rounded-sm hover:bg-gray-50"
+                  aria-label="Cerrar Sesión"
+                >
+                  <LogOut size={18} />
+                  <span className="text-sm">Salir</span>
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={() => scrollToSection("contacto")}
+                  className="bg-primary text-white px-6 py-2.5 rounded-sm hover:bg-primary-light hover:shadow-lg transform hover:scale-105 transition-all duration-300 font-semibold uppercase tracking-wide focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary"
+                  aria-label="Agendar Consulta Legal"
+                >
+                  Agendar Consulta
+                </button>
+                <Link
+                  href="/auth/login"
+                  className="flex items-center space-x-1 text-gray-700 hover:text-primary transition-colors font-medium px-4 py-2 border border-gray-300 rounded-sm hover:border-primary"
+                  aria-label="Iniciar Sesión"
+                >
+                  <User size={18} />
+                  <span>Ingresar</span>
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -201,6 +234,42 @@ export function Header() {
             >
               Agendar Consulta
             </button>
+
+            {/* Auth buttons mobile */}
+            {status === "authenticated" && session?.user?.role === "admin" ? (
+              <div className="mt-4 pt-4 border-t border-gray-200 space-y-2">
+                <Link
+                  href="/admin/blog"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center space-x-2 w-full text-left py-2 px-3 text-gray-800 hover:text-primary hover:bg-primary/5 rounded transition-all duration-200 font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset"
+                  aria-label="Panel de Administración"
+                >
+                  <User size={18} />
+                  <span>Panel Admin ({session.user.name?.split(" ")[0]})</span>
+                </Link>
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    signOut({ callbackUrl: "/" });
+                  }}
+                  className="flex items-center space-x-2 w-full text-left py-2 px-3 text-red-600 hover:bg-red-50 rounded transition-all duration-200 font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset"
+                  aria-label="Cerrar Sesión"
+                >
+                  <LogOut size={18} />
+                  <span>Cerrar Sesión</span>
+                </button>
+              </div>
+            ) : (
+              <Link
+                href="/auth/login"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex items-center justify-center space-x-2 w-full mt-3 px-6 py-2.5 border-2 border-primary text-primary rounded-sm hover:bg-primary hover:text-white transition-all duration-300 font-semibold uppercase tracking-wide focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                aria-label="Iniciar Sesión"
+              >
+                <User size={18} />
+                <span>Ingresar</span>
+              </Link>
+            )}
           </nav>
         )}
       </div>
