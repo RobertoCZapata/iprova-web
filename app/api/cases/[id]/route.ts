@@ -98,8 +98,91 @@ export async function GET(
 }
 
 /**
+ * PATCH /api/cases/[id]
+ * Actualizar campos específicos de un caso (solo admins)
+ */
+export async function PATCH(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const session = await auth();
+
+    if (!session?.user || session.user.role !== "admin") {
+      return NextResponse.json({ error: "No autorizado" }, { status: 401 });
+    }
+
+    const { id } = await params;
+    const body = await request.json();
+
+    // Campos permitidos para actualizar
+    const allowedFields = [
+      "title",
+      "client_name",
+      "client_email",
+      "client_phone",
+      "case_type",
+      "status",
+      "priority",
+      "deadline",
+      "description",
+      "internal_notes",
+      "amount",
+    ];
+
+    // Filtrar solo campos permitidos
+    const updateData: Record<string, any> = {};
+    for (const field of allowedFields) {
+      if (field in body) {
+        updateData[field] = body[field];
+      }
+    }
+
+    // Validar que hay algo que actualizar
+    if (Object.keys(updateData).length === 0) {
+      return NextResponse.json(
+        { error: "No hay campos para actualizar" },
+        { status: 400 }
+      );
+    }
+
+    // Agregar updated_at
+    updateData.updated_at = new Date().toISOString();
+
+    // Si se finaliza el caso, agregar finalized_at
+    if (updateData.status === "finalizado" && !updateData.finalized_at) {
+      updateData.finalized_at = new Date().toISOString();
+    }
+
+    // Actualizar caso
+    const { data: updatedCase, error } = await supabaseAdmin
+      .from("cases")
+      .update(updateData)
+      .eq("id", id)
+      .select()
+      .single();
+
+    if (error) {
+      console.error("Error updating case:", error);
+      return NextResponse.json(
+        { error: "Error al actualizar caso" },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json(updatedCase);
+  } catch (error) {
+    console.error("Error in PATCH /api/cases/[id]:", error);
+    return NextResponse.json(
+      { error: "Error interno del servidor" },
+      { status: 500 }
+    );
+  }
+}
+
+/**
  * PUT /api/cases/[id]
- * Actualizar un caso
+ * Actualizar un caso completo
  */
 export async function PUT(
   request: Request,
@@ -126,6 +209,10 @@ export async function PUT(
         case_type: body.case_type,
         description: body.description,
         status: body.status,
+        priority: body.priority,
+        deadline: body.deadline,
+        internal_notes: body.internal_notes,
+        amount: body.amount,
         finalized_at: body.status === "finalizado" ? new Date().toISOString() : null,
       })
       .eq("id", id)

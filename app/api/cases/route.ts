@@ -87,7 +87,7 @@ export async function POST(request: Request) {
     const body: CreateCaseInput = await request.json();
 
     // Validaciones
-    if (!body.title || !body.client_name || !body.case_type) {
+    if (!body.title || !body.client_name || !body.case_type || !body.priority) {
       return NextResponse.json(
         { error: "Faltan campos requeridos" },
         { status: 400 }
@@ -117,6 +117,8 @@ export async function POST(request: Request) {
         client_email: body.client_email,
         client_phone: body.client_phone,
         case_type: body.case_type,
+        priority: body.priority,
+        deadline: body.deadline,
         description: body.description,
         admin_id: session.user.id,
         status: "activo",

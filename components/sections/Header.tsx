@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, User, LogOut } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { Menu, X, User, LogOut, FileSearch } from "lucide-react";
 import { LogoiProva } from "@/components/ui/LogoiProva";
 import { useSession, signOut } from "next-auth/react";
 
@@ -10,6 +11,7 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { data: session, status } = useSession();
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,6 +32,11 @@ export function Header() {
       document.body.style.overflow = "unset";
     };
   }, [isMobileMenuOpen]);
+
+  // No renderizar header en rutas de admin (después de todos los hooks)
+  if (pathname?.startsWith("/admin")) {
+    return null;
+  }
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -144,16 +151,17 @@ export function Header() {
               </>
             ) : (
               <>
-                <button
-                  onClick={() => scrollToSection("contacto")}
-                  className="bg-primary text-white px-6 py-2.5 rounded-sm hover:bg-primary-light hover:shadow-lg transform hover:scale-105 transition-all duration-300 font-semibold uppercase tracking-wide focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary"
-                  aria-label="Agendar Consulta Legal"
+                <Link
+                  href="/consultar-caso"
+                  className="flex items-center space-x-1 text-primary hover:text-white bg-primary/5 hover:bg-primary transition-all duration-300 font-medium px-4 py-2 border-2 border-primary/20 hover:border-primary rounded-sm"
+                  aria-label="Consultar Estado de Caso"
                 >
-                  Agendar Consulta
-                </button>
+                  <FileSearch size={18} />
+                  <span>Mi Caso</span>
+                </Link>
                 <Link
                   href="/auth/login"
-                  className="flex items-center space-x-1 text-gray-700 hover:text-primary transition-colors font-medium px-4 py-2 border border-gray-300 rounded-sm hover:border-primary"
+                  className="flex items-center space-x-1 text-white bg-primary hover:bg-primary-light transition-all duration-300 font-semibold px-6 py-2 rounded-sm shadow-md hover:shadow-lg hover:scale-105"
                   aria-label="Iniciar Sesión"
                 >
                   <User size={18} />
@@ -227,13 +235,6 @@ export function Header() {
             >
               Contacto
             </button>
-            <button
-              onClick={() => scrollToSection("contacto")}
-              className="w-full bg-primary text-white px-6 py-2.5 rounded-sm hover:bg-primary-light hover:shadow-lg transform hover:scale-[1.02] transition-all duration-300 font-semibold uppercase tracking-wide mt-4 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary"
-              aria-label="Agendar Consulta Legal"
-            >
-              Agendar Consulta
-            </button>
 
             {/* Auth buttons mobile */}
             {status === "authenticated" && session?.user?.role === "admin" ? (
@@ -260,15 +261,26 @@ export function Header() {
                 </button>
               </div>
             ) : (
-              <Link
-                href="/auth/login"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="flex items-center justify-center space-x-2 w-full mt-3 px-6 py-2.5 border-2 border-primary text-primary rounded-sm hover:bg-primary hover:text-white transition-all duration-300 font-semibold uppercase tracking-wide focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                aria-label="Iniciar Sesión"
-              >
-                <User size={18} />
-                <span>Ingresar</span>
-              </Link>
+              <div className="mt-4 pt-4 border-t border-gray-200 space-y-2">
+                <Link
+                  href="/consultar-caso"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center justify-center space-x-2 w-full px-6 py-2.5 bg-primary/5 border-2 border-primary/20 text-primary rounded-sm hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 font-semibold uppercase tracking-wide focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  aria-label="Consultar Estado de Caso"
+                >
+                  <FileSearch size={20} />
+                  <span>Mi Caso</span>
+                </Link>
+                <Link
+                  href="/auth/login"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center justify-center space-x-2 w-full px-6 py-2.5 bg-primary text-white rounded-sm hover:bg-primary-light hover:shadow-lg transition-all duration-300 font-semibold uppercase tracking-wide focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
+                  aria-label="Iniciar Sesión"
+                >
+                  <User size={20} />
+                  <span>Ingresar</span>
+                </Link>
+              </div>
             )}
           </nav>
         )}

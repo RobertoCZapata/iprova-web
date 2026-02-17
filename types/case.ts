@@ -9,7 +9,11 @@ export interface Case {
   client_phone?: string;
   case_type: string; // Penal, Laboral, Civil, etc.
   status: "activo" | "finalizado" | "archivado";
-  description?: string;
+  priority: "baja" | "media" | "alta" | "urgente";
+  deadline?: string;
+  description?: string; // Descripción pública visible para el cliente
+  internal_notes?: string; // Notas internas, solo para abogados
+  amount?: number; // Cuantía estimada o costo del caso
   admin_id: string; // ID del abogado responsable
   created_at: string;
   updated_at: string;
@@ -61,7 +65,10 @@ export interface CreateCaseInput {
   client_email?: string;
   client_phone?: string;
   case_type: string;
+  priority: "baja" | "media" | "alta" | "urgente";
+  deadline?: string;
   description?: string;
+  amount?: number;
 }
 
 export interface CreateNoteInput {
@@ -107,7 +114,11 @@ export const CASE_STATUSES = ["activo", "finalizado", "archivado"] as const;
 
 export type CaseStatus = (typeof CASE_STATUSES)[number];
 
-// Opciones de prioridades
-export const TASK_PRIORITIES = ["baja", "media", "alta", "urgente"] as const;
+// Opciones de prioridades (usadas para casos y tareas)
+export const PRIORITIES = ["baja", "media", "alta", "urgente"] as const;
 
-export type TaskPriority = (typeof TASK_PRIORITIES)[number];
+export type Priority = (typeof PRIORITIES)[number];
+
+// Alias para compatibilidad
+export const TASK_PRIORITIES = PRIORITIES;
+export type TaskPriority = Priority;

@@ -27,36 +27,17 @@ export default function AdminBlogPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-4">
-              <Link
-                href="/admin"
-                className="flex items-center space-x-2 text-gray-600 hover:text-primary transition-colors"
-              >
-                <ArrowLeft size={20} />
-                <span className="text-sm font-medium">Volver al Dashboard</span>
-              </Link>
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">
-                Gestión de Artículos
-              </h1>
-            </div>
-            <Button
-              onClick={() => signOut({ callbackUrl: "/" })}
-              variant="outline"
-              size="sm"
-            >
-              Cerrar Sesión
-            </Button>
-          </div>
+      <header className="bg-white border-b border-gray-200">
+        <div className="px-8 py-6">
+          <h1 className="text-2xl font-bold text-gray-900">Gestión de Artículos</h1>
+          <p className="text-sm text-gray-600 mt-1">
+            Crea y publica contenido en el blog de iPROVA
+          </p>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <main className="px-8 py-8">
         <div className="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-xl p-12 text-center border border-gray-100">
           {/* Animated Icon */}
           <div className="relative inline-block mb-8">

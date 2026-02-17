@@ -1,16 +1,15 @@
 "use client";
 
-import { useSession, signOut } from "next-auth/react";
-import { redirect, useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
-import { ArrowLeft, Plus, Search, Filter, Briefcase } from "lucide-react";
+import { FileText, Search, AlertCircle, Clock, Calendar, User, CheckCircle, Copy, Eye } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Case, CASE_TYPES, CASE_STATUSES } from "@/types/case";
+import { Case, CASE_TYPES, CASE_STATUSES, PRIORITIES } from "@/types/case";
 
 export default function AdminCasosPage() {
   const { data: session, status } = useSession();
-  const router = useRouter();
   const [cases, setCases] = useState<Case[]>([]);
   const [loading, setLoading] = useState(true);
   const [showCreateModal, setShowCreateModal] = useState(false);
@@ -64,41 +63,74 @@ export default function AdminCasosPage() {
       : true
   );
 
+  const getPriorityBadge = (priority: string) => {
+    const styles = {
+      urgente: "bg-red-100 text-red-800 border-red-200",
+      alta: "bg-orange-100 text-orange-800 border-orange-200",
+      media: "bg-yellow-100 text-yellow-800 border-yellow-200",
+      baja: "bg-blue-100 text-blue-800 border-blue-200",
+    };
+    return styles[priority as keyof typeof styles] || styles.media;
+  };
+
+  const getStatusBadge = (status: string) => {
+    const styles = {
+      activo: "bg-green-100 text-green-800 border-green-200",
+      finalizado: "bg-blue-100 text-blue-800 border-blue-200",
+      archivado: "bg-gray-100 text-gray-800 border-gray-200",
+    };
+    return styles[status as keyof typeof styles] || styles.activo;
+  };
+
+  const formatDeadline = (deadline?: string) => {
+    if (!deadline) return <span className="text-gray-400">Sin fecha</span>;
+
+    const date = new Date(deadline);
+    const now = new Date();
+    now.setHours(0, 0, 0, 0);
+    const deadlineDate = new Date(deadline);
+    deadlineDate.setHours(0, 0, 0, 0);
+
+    const diffMs = deadlineDate.getTime() - now.getTime();
+    const diffDays = Math.ceil(diffMs / 86400000);
+
+    let colorClass = "text-gray-700";
+    let icon = null;
+
+    if (diffDays < 0) {
+      colorClass = "text-red-600 font-semibold";
+      icon = <AlertCircle size={14} className="inline mr-1" />;
+    } else if (diffDays <= 3) {
+      colorClass = "text-orange-600 font-semibold";
+      icon = <Clock size={14} className="inline mr-1" />;
+    } else if (diffDays <= 7) {
+      colorClass = "text-yellow-600";
+    }
+
+    return (
+      <span className={colorClass}>
+        {icon}
+        {date.toLocaleDateString("es-CO", { day: "2-digit", month: "short", year: "numeric" })}
+      </span>
+    );
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-4">
-              <Link
-                href="/admin"
-                className="flex items-center space-x-2 text-gray-600 hover:text-primary transition-colors"
-              >
-                <ArrowLeft size={20} />
-                <span className="text-sm font-medium">Dashboard</span>
-              </Link>
-              <div className="h-6 w-px bg-gray-300"></div>
-              <h1 className="text-2xl font-bold text-gray-900 flex items-center space-x-2">
-                <Briefcase size={24} className="text-primary" />
-                <span>Gestión de Casos</span>
-              </h1>
-            </div>
-            <Button
-              onClick={() => signOut({ callbackUrl: "/" })}
-              variant="outline"
-              size="sm"
-            >
-              Cerrar Sesión
-            </Button>
-          </div>
+      <header className="bg-white border-b border-gray-200">
+        <div className="px-8 py-6">
+          <h1 className="text-2xl font-bold text-gray-900">Gestión de Casos</h1>
+          <p className="text-sm text-gray-600 mt-1">
+            Administra todos los casos legales de iPROVA
+          </p>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="px-8 py-8">
         {/* Actions Bar */}
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div className="flex-1 flex gap-4">
               {/* Search */}
@@ -135,24 +167,24 @@ export default function AdminCasosPage() {
             <Button
               onClick={() => setShowCreateModal(true)}
               variant="primary"
-              size="md"
-              className="flex items-center space-x-2"
+              size="lg"
+              className="gap-3 shadow-lg"
             >
-              <Plus size={20} />
+              <FileText size={22} />
               <span>Crear Caso</span>
             </Button>
           </div>
         </div>
 
-        {/* Cases List */}
+        {/* Cases Table */}
         {loading ? (
           <div className="text-center py-12">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
             <p className="text-gray-600">Cargando casos...</p>
           </div>
         ) : filteredCases.length === 0 ? (
-          <div className="bg-white rounded-lg shadow-sm p-12 text-center">
-            <Briefcase size={48} className="text-gray-300 mx-auto mb-4" />
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-12 text-center">
+            <Calendar size={48} className="text-gray-300 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-700 mb-2">
               No hay casos
             </h3>
@@ -166,54 +198,122 @@ export default function AdminCasosPage() {
                 onClick={() => setShowCreateModal(true)}
                 variant="primary"
                 size="lg"
+                className="gap-3"
               >
-                <Plus size={20} className="mr-2" />
+                <FileText size={22} />
                 Crear Primer Caso
               </Button>
             )}
           </div>
         ) : (
-          <div className="grid gap-4">
-            {filteredCases.map((caseItem) => (
-              <Link
-                key={caseItem.id}
-                href={`/admin/casos/${caseItem.id}`}
-                className="block bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow p-6 border-l-4 border-primary"
-              >
-                <div className="flex justify-between items-start mb-3">
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">
-                      {caseItem.case_number} - {caseItem.title}
-                    </h3>
-                    <p className="text-sm text-gray-600">
-                      Cliente: <strong>{caseItem.client_name}</strong>
-                    </p>
-                  </div>
-                  <span
-                    className={`px-3 py-1 rounded-full text-xs font-medium ${
-                      caseItem.status === "activo"
-                        ? "bg-green-100 text-green-800"
-                        : caseItem.status === "finalizado"
-                        ? "bg-blue-100 text-blue-800"
-                        : "bg-gray-100 text-gray-800"
-                    }`}
-                  >
-                    {caseItem.status.charAt(0).toUpperCase() +
-                      caseItem.status.slice(1)}
-                  </span>
-                </div>
-                <div className="flex items-center gap-4 text-sm text-gray-500">
-                  <span className="flex items-center">
-                    <span className="w-2 h-2 bg-primary rounded-full mr-2"></span>
-                    {caseItem.case_type}
-                  </span>
-                  <span>
-                    Creado:{" "}
-                    {new Date(caseItem.created_at).toLocaleDateString("es-CO")}
-                  </span>
-                </div>
-              </Link>
-            ))}
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="bg-gray-50 border-b border-gray-200">
+                  <tr>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                      ID
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                      Título
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                      Líder Investigador
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                      Tipo
+                    </th>
+                    <th className="px-6 py-4 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                      Prioridad
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                      Deadline
+                    </th>
+                    <th className="px-6 py-4 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                      Estatus
+                    </th>
+                    <th className="px-6 py-4 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                      Acciones
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200">
+                  {filteredCases.map((caseItem: any) => (
+                    <tr
+                      key={caseItem.id}
+                      className="hover:bg-gray-50 transition-colors cursor-pointer"
+                      onClick={() => window.location.href = `/admin/casos/${caseItem.id}`}
+                    >
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center">
+                          <span className="text-sm font-mono font-semibold text-primary">
+                            {caseItem.case_number}
+                          </span>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="flex flex-col">
+                          <span className="text-sm font-medium text-gray-900">
+                            {caseItem.title}
+                          </span>
+                          <span className="text-xs text-gray-500">
+                            {caseItem.client_name}
+                          </span>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center border-2 border-gray-200">
+                            <User size={16} className="text-primary" />
+                          </div>
+                          <span className="text-sm text-gray-700">
+                            {caseItem.admin_name || session?.user?.name || "Sin asignar"}
+                          </span>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <span className="text-sm text-gray-700">
+                          {caseItem.case_type}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center">
+                        <span
+                          className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium border ${getPriorityBadge(
+                            caseItem.priority
+                          )}`}
+                        >
+                          {caseItem.priority.charAt(0).toUpperCase() +
+                            caseItem.priority.slice(1)}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm">
+                        {formatDeadline(caseItem.deadline)}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center">
+                        <span
+                          className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium border ${getStatusBadge(
+                            caseItem.status
+                          )}`}
+        >
+                          {caseItem.status.charAt(0).toUpperCase() +
+                            caseItem.status.slice(1)}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center">
+                        <Link
+                          href={`/admin/casos/${caseItem.id}`}
+                          onClick={(e) => e.stopPropagation()}
+                          className="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-primary bg-primary/5 hover:bg-primary hover:text-white border border-primary/20 hover:border-primary rounded-lg transition-all duration-200"
+                        >
+                          <Eye size={16} />
+                          Ver
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
       </main>
@@ -242,12 +342,16 @@ function CreateCaseModal({
 }) {
   const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [createdCaseNumber, setCreatedCaseNumber] = useState("");
   const [formData, setFormData] = useState({
     title: "",
     client_name: "",
     client_email: "",
     client_phone: "",
     case_type: "Penal",
+    priority: "media" as "baja" | "media" | "alta" | "urgente",
+    deadline: "",
     description: "",
   });
 
@@ -263,7 +367,9 @@ function CreateCaseModal({
       });
 
       if (response.ok) {
-        onSuccess();
+        const newCase = await response.json();
+        setCreatedCaseNumber(newCase.case_number);
+        setShowSuccess(true);
       } else {
         alert("Error al crear caso");
       }
@@ -274,6 +380,70 @@ function CreateCaseModal({
       setLoading(false);
     }
   };
+
+  const handleCopyCode = () => {
+    navigator.clipboard.writeText(createdCaseNumber);
+    alert("Código copiado al portapapeles");
+  };
+
+  const handleCloseSuccess = () => {
+    setShowSuccess(false);
+    setCreatedCaseNumber("");
+    onSuccess();
+  };
+
+  // Modal de éxito
+  if (showSuccess) {
+    return (
+      <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+        <div className="bg-white rounded-lg max-w-md w-full p-8 text-center">
+          <div className="mb-6">
+            <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+              <CheckCircle size={32} className="text-green-600" />
+            </div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">
+              ¡Caso Creado Exitosamente!
+            </h2>
+            <p className="text-gray-600 mb-6">
+              Comparte este código con tu cliente para que pueda consultar el estado de su caso
+            </p>
+          </div>
+
+          <div className="bg-primary/5 border-2 border-primary/20 rounded-lg p-6 mb-6">
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Código del Caso
+            </label>
+            <div className="flex items-center justify-center gap-3">
+              <code className="text-3xl font-bold text-primary tracking-wider">
+                {createdCaseNumber}
+              </code>
+              <button
+                onClick={handleCopyCode}
+                className="p-2 hover:bg-primary/10 rounded-lg transition-colors"
+                title="Copiar código"
+              >
+                <Copy size={24} className="text-primary" />
+              </button>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            <Button
+              onClick={handleCloseSuccess}
+              variant="primary"
+              className="w-full"
+            >
+              Entendido
+            </Button>
+            <p className="text-sm text-gray-500">
+              El cliente puede consultar su caso en:{" "}
+              <span className="font-mono text-primary">iprova.com.co/consultar-caso</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
@@ -340,6 +510,43 @@ function CreateCaseModal({
                   </option>
                 ))}
               </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Prioridad *
+              </label>
+              <select
+                required
+                value={formData.priority}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    priority: e.target.value as "baja" | "media" | "alta" | "urgente",
+                  })
+                }
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+              >
+                {PRIORITIES.map((priority) => (
+                  <option key={priority} value={priority}>
+                    {priority.charAt(0).toUpperCase() + priority.slice(1)}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Fecha Límite (Deadline)
+              </label>
+              <input
+                type="date"
+                value={formData.deadline}
+                onChange={(e) =>
+                  setFormData({ ...formData, deadline: e.target.value })
+                }
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+              />
             </div>
 
             <div>
