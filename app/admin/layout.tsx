@@ -96,7 +96,7 @@ export default function AdminLayout({
               <span className="text-xs font-medium text-green-700">Conectado</span>
             </div>
             <button
-              onClick={() => signOut({ callbackUrl: '/auth/login' })}
+              onClick={() => signOut({ callbackUrl: '/' })}
               className="ml-2 px-3 py-1.5 text-xs font-semibold text-gray-700 hover:text-red-600 hover:bg-red-50 border border-gray-300 rounded transition-colors flex items-center gap-1.5"
               title="Cerrar sesión"
             >
