@@ -23,7 +23,7 @@ export async function PUT(
     // Verificar que la tarea existe y pertenece al caso
     const { data: existingTask } = await supabaseAdmin
       .from("case_tasks")
-      .select("id, case_id")
+      .select("id, case_id, status")
       .eq("id", taskId)
       .eq("case_id", id)
       .single();
@@ -113,7 +113,7 @@ export async function DELETE(
     // Verificar que la tarea existe y pertenece al caso
     const { data: existingTask } = await supabaseAdmin
       .from("case_tasks")
-      .select("id, case_id")
+      .select("id, case_id, status")
       .eq("id", taskId)
       .eq("case_id", id)
       .single();
