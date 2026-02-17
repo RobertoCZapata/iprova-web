@@ -59,14 +59,17 @@ export async function GET(
     }
 
     // Formatear respuesta con solo información pública
-    const publicUpdates = updates?.map((update: any) => ({
-      id: update.id,
-      title: update.title,
-      description: update.description,
-      update_type: update.update_type,
-      created_at: update.created_at,
-      admin_name: update.admin?.name || "iPROVA",
-    }));
+    const publicUpdates = updates?.map((update: any) => {
+      const admin = Array.isArray(update.admin) ? update.admin[0] : update.admin;
+      return {
+        id: update.id,
+        title: update.title,
+        description: update.description,
+        update_type: update.update_type,
+        created_at: update.created_at,
+        admin_name: admin?.name || "iPROVA",
+      };
+    });
 
     return NextResponse.json(publicUpdates || []);
   } catch (error) {

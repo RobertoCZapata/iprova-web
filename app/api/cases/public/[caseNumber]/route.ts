@@ -49,6 +49,7 @@ export async function GET(
 
     // Formatear respuesta con solo información relevante para el cliente
     // NOTA: internal_notes NO se incluye (es privado para abogados)
+    const admin = Array.isArray(caseData.admin) ? caseData.admin[0] : caseData.admin;
     const publicCaseData = {
       case_number: caseData.case_number,
       title: caseData.title,
@@ -60,7 +61,7 @@ export async function GET(
       description: caseData.description, // Descripción pública
       created_at: caseData.created_at,
       updated_at: caseData.updated_at,
-      admin_name: caseData.admin?.name || "No asignado",
+      admin_name: admin?.name || "No asignado",
     };
 
     return NextResponse.json(publicCaseData);
