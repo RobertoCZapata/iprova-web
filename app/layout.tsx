@@ -5,6 +5,7 @@ import { ConditionalWidgets } from "@/components/ConditionalWidgets";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { Header } from "@/components/sections/Header";
 import { SessionProvider } from "@/components/providers/SessionProvider";
+import { ToastProvider } from "@/components/providers/ToastProvider";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -198,6 +199,7 @@ export default function RootLayout({
           {children}
           <ConditionalWidgets />
           <GoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || ""} />
+          <ToastProvider />
         </SessionProvider>
       </body>
     </html>

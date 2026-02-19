@@ -3,11 +3,10 @@
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { Plus } from "lucide-react";
-import { Button } from "@/components/ui/Button";
-import { BlogPostList } from "@/components/admin/blog/BlogPostList";
+import { ArrowLeft } from "lucide-react";
+import { BlogPostForm } from "@/components/admin/blog/BlogPostForm";
 
-export default function AdminBlogPage() {
+export default function NewBlogPostPage() {
   const { data: session, status } = useSession();
 
   if (status === "loading") {
@@ -29,28 +28,27 @@ export default function AdminBlogPage() {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <header className="bg-white border-b border-gray-200">
-        <div className="px-8 py-6 flex justify-between items-center">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900">
-              Gestión de Artículos
-            </h1>
-            <p className="text-sm text-gray-600 mt-1">
-              Crea y publica contenido en el blog de iPROVA
-            </p>
-          </div>
-
-          <Link href="/admin/blog/nuevo">
-            <Button variant="primary" className="flex items-center gap-2">
-              <Plus size={20} />
-              Nuevo Artículo
-            </Button>
+        <div className="px-8 py-6">
+          <Link
+            href="/admin/blog"
+            className="inline-flex items-center gap-2 text-gray-600 hover:text-primary font-semibold mb-4 transition-colors"
+          >
+            <ArrowLeft size={20} />
+            Volver a artículos
           </Link>
+
+          <h1 className="text-2xl font-bold text-gray-900">
+            Nuevo Artículo
+          </h1>
+          <p className="text-sm text-gray-600 mt-1">
+            Crea un nuevo artículo para el blog de iPROVA
+          </p>
         </div>
       </header>
 
       {/* Main Content */}
       <main className="px-8 py-8">
-        <BlogPostList />
+        <BlogPostForm mode="create" />
       </main>
     </div>
   );

@@ -33,8 +33,8 @@ export function Header() {
     };
   }, [isMobileMenuOpen]);
 
-  // No renderizar header en rutas de admin (después de todos los hooks)
-  if (pathname?.startsWith("/admin")) {
+  // No renderizar header en rutas de admin y auth (después de todos los hooks)
+  if (pathname?.startsWith("/admin") || pathname?.startsWith("/auth")) {
     return null;
   }
 

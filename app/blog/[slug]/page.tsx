@@ -2,10 +2,74 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getBlogPostBySlug, getAllBlogPosts } from "@/lib/data/blog";
+import ReactMarkdown from "react-markdown";
 import { CategoryBadge } from "@/components/blog/CategoryBadge";
 import { BlogCard } from "@/components/blog/BlogCard";
-import { Calendar, Clock, Eye, ArrowLeft, Mail, Linkedin } from "lucide-react";
+import { Calendar, Clock, Eye, ArrowLeft, Mail, ThumbsUp, ThumbsDown } from "lucide-react";
+import type { PublicBlogPostListItem } from "@/lib/types/blog";
+
+interface PublicBlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  featured_image: string | null;
+  author_name: string;
+  author_email: string | null;
+  category: string;
+  reading_time: number;
+  views: number;
+  published_at: string;
+  featured: boolean;
+  meta_title: string | null;
+  meta_description: string | null;
+  tags: string[];
+}
+
+async function getBlogPost(slug: string): Promise<PublicBlogPost | null> {
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://iprova-web.vercel.app";
+    const response = await fetch(`${baseUrl}/api/blog/public/${slug}`, {
+      next: { revalidate: 60 }, // ISR: revalidate every 60 seconds
+    });
+
+    if (!response.ok) {
+      return null;
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error("Error fetching blog post:", error);
+    return null;
+  }
+}
+
+async function getRelatedPosts(
+  currentPostId: string,
+  category: string
+): Promise<PublicBlogPostListItem[]> {
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://iprova-web.vercel.app";
+    const response = await fetch(
+      `${baseUrl}/api/blog/public?category=${encodeURIComponent(category)}&limit=4`,
+      {
+        next: { revalidate: 60 },
+      }
+    );
+
+    if (!response.ok) {
+      return [];
+    }
+
+    const posts: PublicBlogPostListItem[] = await response.json();
+    // Filter out current post and limit to 3
+    return posts.filter((p) => p.id !== currentPostId).slice(0, 3);
+  } catch (error) {
+    console.error("Error fetching related posts:", error);
+    return [];
+  }
+}
 
 export async function generateMetadata({
   params,
@@ -13,7 +77,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = getBlogPostBySlug(slug);
+  const post = await getBlogPost(slug);
 
   if (!post) {
     return {
@@ -22,9 +86,9 @@ export async function generateMetadata({
   }
 
   return {
-    title: post.seo?.metaTitle || `${post.title} | Blog iPROVA`,
-    description: post.seo?.metaDescription || post.excerpt,
-    keywords: post.seo?.keywords || post.tags,
+    title: post.meta_title || `${post.title} | Blog iPROVA`,
+    description: post.meta_description || post.excerpt,
+    keywords: post.tags,
   };
 }
 
@@ -34,26 +98,20 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getBlogPostBySlug(slug);
+  const post = await getBlogPost(slug);
 
   if (!post) {
     notFound();
   }
 
-  const formattedDate = new Date(post.publishedAt).toLocaleDateString("es-ES", {
+  const formattedDate = new Date(post.published_at).toLocaleDateString("es-ES", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
 
-  // Posts relacionados (mismo autor o categoría)
-  const relatedPosts = getAllBlogPosts()
-    .filter(
-      (p) =>
-        p.id !== post.id &&
-        (p.author.id === post.author.id || p.category.id === post.category.id)
-    )
-    .slice(0, 3);
+  // Posts relacionados (misma categoría)
+  const relatedPosts = await getRelatedPosts(post.id, post.category);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -74,7 +132,9 @@ export default async function BlogPostPage({
       <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Category & Meta */}
         <div className="mb-6 flex flex-wrap items-center gap-4 text-sm">
-          <CategoryBadge category={post.category} />
+          <CategoryBadge
+            category={{ id: post.category, name: post.category }}
+          />
           <div className="flex items-center gap-4 text-gray-600">
             <div className="flex items-center gap-1">
               <Calendar size={16} />
@@ -82,7 +142,7 @@ export default async function BlogPostPage({
             </div>
             <div className="flex items-center gap-1">
               <Clock size={16} />
-              <span>{post.readingTime} min lectura</span>
+              <span>{post.reading_time} min lectura</span>
             </div>
             {post.views && (
               <div className="flex items-center gap-1">
@@ -100,33 +160,32 @@ export default async function BlogPostPage({
 
         {/* Author info */}
         <div className="flex items-center gap-4 pb-8 border-b border-gray-200 mb-8">
-          <Image
-            src={post.author.image}
-            alt={post.author.name}
-            width={64}
-            height={64}
-            className="rounded-full"
-          />
+          <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
+            <span className="text-2xl font-bold text-primary">
+              {post.author_name.charAt(0)}
+            </span>
+          </div>
           <div>
-            <div className="font-bold text-lg">{post.author.name}</div>
-            <div className="text-gray-600 text-sm">{post.author.role}</div>
+            <div className="font-bold text-lg">{post.author_name}</div>
+            <div className="text-gray-600 text-sm">iPROVA</div>
           </div>
         </div>
 
         {/* Featured Image */}
-        <div className="relative w-full h-96 rounded-lg overflow-hidden mb-12">
-          <Image
-            src={post.featuredImage}
-            alt={post.title}
-            fill
-            className="object-cover"
-          />
-        </div>
+        {post.featured_image && (
+          <div className="relative w-full h-96 rounded-lg overflow-hidden mb-12">
+            <Image
+              src={post.featured_image}
+              alt={post.title}
+              fill
+              className="object-cover"
+            />
+          </div>
+        )}
 
         {/* Content */}
         <div className="prose prose-lg max-w-none mb-12">
-          {/* Aquí se renderizaría el contenido markdown con un renderer */}
-          <div className="whitespace-pre-wrap">{post.content}</div>
+          <ReactMarkdown>{post.content}</ReactMarkdown>
         </div>
 
         {/* Tags */}
@@ -142,16 +201,21 @@ export default async function BlogPostPage({
         </div>
 
         {/* Feedback */}
-        <div className="bg-gray-100 rounded-lg p-6 text-center mb-12">
-          <p className="text-lg font-semibold text-gray-900 mb-4">
+        <div className="bg-white border border-gray-200 rounded-lg p-8 text-center mb-12">
+          <p className="text-xl font-bold text-primary mb-2">
             ¿Te fue útil este artículo?
           </p>
-          <div className="flex gap-4 justify-center">
-            <button className="px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-sm font-semibold">
-              👍 Sí (234)
+          <p className="text-sm text-gray-600 mb-6">
+            Tu opinión nos ayuda a mejorar el contenido
+          </p>
+          <div className="flex gap-3 justify-center">
+            <button className="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 hover:bg-primary hover:text-white text-primary rounded-sm font-semibold transition-all duration-200 border-2 border-primary/20 hover:border-primary">
+              <ThumbsUp size={20} />
+              Sí, me fue útil
             </button>
-            <button className="px-6 py-2 bg-red-500 hover:bg-red-600 text-white rounded-sm font-semibold">
-              👎 No (12)
+            <button className="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-sm font-semibold transition-all duration-200 border-2 border-gray-200 hover:border-gray-300">
+              <ThumbsDown size={20} />
+              No me ayudó
             </button>
           </div>
         </div>
@@ -159,49 +223,29 @@ export default async function BlogPostPage({
         {/* Author Card */}
         <div className="bg-white rounded-lg p-8 border border-gray-200 mb-12">
           <div className="flex items-start gap-6">
-            <Image
-              src={post.author.image}
-              alt={post.author.name}
-              width={120}
-              height={120}
-              className="rounded-full"
-            />
-            <div>
+            <div className="w-24 h-24 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <span className="text-4xl font-bold text-primary">
+                {post.author_name.charAt(0)}
+              </span>
+            </div>
+            <div className="flex-1">
               <h3 className="text-2xl font-bold text-primary mb-2">
                 Sobre el autor
               </h3>
-              <p className="text-xl font-semibold mb-2">{post.author.name}</p>
-              <p className="text-gray-600 mb-4">{post.author.bio}</p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {post.author.specialties.map((spec) => (
-                  <span
-                    key={spec}
-                    className="px-3 py-1 bg-primary/10 text-primary text-sm font-semibold rounded-sm"
-                  >
-                    {spec}
-                  </span>
-                ))}
-              </div>
-              <div className="flex gap-3">
+              <p className="text-xl font-semibold mb-2">{post.author_name}</p>
+              <p className="text-gray-600 mb-4">
+                Abogado del equipo iPROVA con más de 20 años de experiencia en
+                derecho penal, laboral y corporativo.
+              </p>
+              {post.author_email && (
                 <a
-                  href={`mailto:${post.author.email}`}
+                  href={`mailto:${post.author_email}`}
                   className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-sm font-semibold hover:bg-primary/90"
                 >
                   <Mail size={16} />
                   Contactar
                 </a>
-                {post.author.linkedin && (
-                  <a
-                    href={post.author.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-sm font-semibold hover:bg-blue-700"
-                  >
-                    <Linkedin size={16} />
-                    LinkedIn
-                  </a>
-                )}
-              </div>
+              )}
             </div>
           </div>
         </div>

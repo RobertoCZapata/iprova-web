@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { getAllBlogPosts, blogCategories } from "@/lib/data/blog";
+import { blogCategories } from "@/lib/data/blog";
 import { BlogCard } from "@/components/blog/BlogCard";
 import { BookOpen } from "lucide-react";
+import type { PublicBlogPostListItem } from "@/lib/types/blog";
 
 export const metadata: Metadata = {
   title: "Blog | iPROVA - Conocimiento Legal y Estratégico",
@@ -9,10 +10,43 @@ export const metadata: Metadata = {
     "Artículos sobre derecho penal, laboral, investigación privada y más. Conocimiento legal práctico de expertos con más de 20 años de experiencia.",
 };
 
-export default function BlogPage() {
-  const posts = getAllBlogPosts();
+async function getBlogPosts(): Promise<PublicBlogPostListItem[]> {
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://iprova-web.vercel.app";
+    console.log("[Blog] Fetching posts from:", `${baseUrl}/api/blog/public`);
+
+    const response = await fetch(`${baseUrl}/api/blog/public`, {
+      next: { revalidate: 60 }, // ISR: revalidate every 60 seconds
+      cache: 'no-store', // Temporalmente deshabilitar cache para debug
+    });
+
+    if (!response.ok) {
+      console.error("[Blog] Error fetching blog posts, status:", response.status);
+      const text = await response.text();
+      console.error("[Blog] Response:", text);
+      return [];
+    }
+
+    const posts = await response.json();
+    console.log("[Blog] Posts fetched:", posts.length);
+    return posts;
+  } catch (error) {
+    console.error("[Blog] Error fetching blog posts:", error);
+    return [];
+  }
+}
+
+export default async function BlogPage() {
+  const posts = await getBlogPosts();
   const featuredPosts = posts.filter((p) => p.featured);
   const regularPosts = posts.filter((p) => !p.featured);
+
+  const categories = [
+    { id: "penal", name: "Derecho Penal" },
+    { id: "laboral", name: "Derecho Laboral" },
+    { id: "corporativo", name: "Derecho Corporativo" },
+    { id: "investigacion", name: "Investigación" },
+  ];
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -45,7 +79,7 @@ export default function BlogPage() {
             <button className="px-4 py-2 bg-primary text-white rounded-sm font-semibold text-sm">
               Todos
             </button>
-            {Object.values(blogCategories).map((category) => (
+            {categories.map((category) => (
               <button
                 key={category.id}
                 className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-sm font-semibold text-sm transition-colors"
@@ -76,11 +110,20 @@ export default function BlogPage() {
         <h2 className="text-2xl font-bold text-primary mb-6">
           Últimos Artículos
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {regularPosts.map((post) => (
-            <BlogCard key={post.id} post={post} />
-          ))}
-        </div>
+
+        {regularPosts.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-gray-600">
+              No hay artículos publicados en este momento.
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {regularPosts.map((post) => (
+              <BlogCard key={post.id} post={post} />
+            ))}
+          </div>
+        )}
       </section>
 
       {/* Newsletter CTA */}

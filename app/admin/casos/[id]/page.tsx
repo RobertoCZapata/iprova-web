@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import { redirect, useRouter, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import Link from "next/link";
 import { Case } from "@/types/case";
 import { CaseUpdate, UPDATE_TYPES, UpdateType } from "@/types/case-update";
@@ -109,13 +110,13 @@ export default function CaseDetailPage() {
       });
 
       if (response.ok) {
-        alert("Notas internas guardadas");
+        toast.success("Notas internas guardadas");
       } else {
-        alert("Error al guardar notas");
+        toast.error("Error al guardar notas");
       }
     } catch (error) {
       console.error("Error saving notes:", error);
-      alert("Error al guardar notas");
+      toast.error("Error al guardar notas");
     } finally {
       setSaving(false);
     }
@@ -147,17 +148,17 @@ export default function CaseDetailPage() {
         setShowUpdateForm(false);
         setEditingUpdate(null);
         fetchUpdates();
-        alert(
+        toast.success(
           editingUpdate
             ? "Actualización editada exitosamente"
             : "Actualización creada exitosamente"
         );
       } else {
-        alert("Error al guardar actualización");
+        toast.error("Error al guardar actualización");
       }
     } catch (error) {
       console.error("Error saving update:", error);
-      alert("Error al guardar actualización");
+      toast.error("Error al guardar actualización");
     } finally {
       setSaving(false);
     }
@@ -182,13 +183,13 @@ export default function CaseDetailPage() {
 
       if (response.ok) {
         fetchUpdates();
-        alert("Actualización eliminada exitosamente");
+        toast.success("Actualización eliminada exitosamente");
       } else {
-        alert("Error al eliminar actualización");
+        toast.error("Error al eliminar actualización");
       }
     } catch (error) {
       console.error("Error deleting update:", error);
-      alert("Error al eliminar actualización");
+      toast.error("Error al eliminar actualización");
     }
   };
 
@@ -217,14 +218,14 @@ export default function CaseDetailPage() {
       });
 
       if (response.ok) {
-        alert("Caso finalizado exitosamente");
+        toast.success("Caso finalizado exitosamente");
         fetchCaseData(); // Refrescar datos del caso
       } else {
-        alert("Error al finalizar caso");
+        toast.error("Error al finalizar caso");
       }
     } catch (error) {
       console.error("Error finishing case:", error);
-      alert("Error al finalizar caso");
+      toast.error("Error al finalizar caso");
     } finally {
       setSaving(false);
     }
