@@ -23,7 +23,8 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
   const readingTime = isApiPost ? post.reading_time : post.readingTime;
   const authorName = isApiPost ? post.author_name : post.author.name;
   const authorImage = isApiPost ? null : post.author.image;
-  const category = isApiPost ? { id: post.category, name: post.category } : post.category;
+  // CategoryBadge now accepts string | BlogCategory, so we can pass directly
+  const category = post.category;
 
   const formattedDate = new Date(publishedAt).toLocaleDateString("es-ES", {
     year: "numeric",
