@@ -49,9 +49,12 @@ export async function GET(
       .order("tag", { ascending: true });
 
     // 4. Formatear respuesta
+    // TypeScript fix: author puede ser inferido como array por Supabase
+    const authorData: any = Array.isArray(post.author) ? post.author[0] : post.author;
+
     const response = {
       ...post,
-      author_name: post.author?.name,
+      author_name: authorData?.name,
       author: undefined,
       tags: tags?.map((t) => t.tag) || [],
     };

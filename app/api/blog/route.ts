@@ -71,11 +71,16 @@ export async function GET(request: Request) {
     }
 
     // 6. Formatear respuesta (flatten nested objects)
-    const formattedPosts = posts?.map((post: any) => ({
-      ...post,
-      author_name: post.author?.name,
-      author: undefined, // Remove nested object
-    }));
+    const formattedPosts = posts?.map((post: any) => {
+      // TypeScript fix: author puede ser inferido como array por Supabase
+      const authorData = Array.isArray(post.author) ? post.author[0] : post.author;
+
+      return {
+        ...post,
+        author_name: authorData?.name,
+        author: undefined, // Remove nested object
+      };
+    });
 
     return NextResponse.json(formattedPosts || []);
   } catch (error) {

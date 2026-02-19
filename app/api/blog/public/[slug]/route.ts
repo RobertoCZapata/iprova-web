@@ -70,6 +70,9 @@ export async function GET(
     );
 
     // 5. Formatear respuesta pública
+    // TypeScript fix: author puede ser inferido como array por Supabase
+    const authorData: any = Array.isArray(post.author) ? post.author[0] : post.author;
+
     const response = {
       id: post.id,
       title: post.title,
@@ -77,8 +80,8 @@ export async function GET(
       excerpt: post.excerpt,
       content: post.content,
       featured_image: post.featured_image,
-      author_name: post.author?.name || "iPROVA",
-      author_email: post.author?.email,
+      author_name: authorData?.name || "iPROVA",
+      author_email: authorData?.email,
       category: post.category,
       reading_time: post.reading_time,
       views: post.views + 1, // Mostrar el nuevo valor
