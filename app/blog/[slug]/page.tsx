@@ -132,9 +132,7 @@ export default async function BlogPostPage({
       <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Category & Meta */}
         <div className="mb-6 flex flex-wrap items-center gap-4 text-sm">
-          <CategoryBadge
-            category={{ id: post.category, name: post.category }}
-          />
+          <CategoryBadge category={post.category} />
           <div className="flex items-center gap-4 text-gray-600">
             <div className="flex items-center gap-1">
               <Calendar size={16} />
