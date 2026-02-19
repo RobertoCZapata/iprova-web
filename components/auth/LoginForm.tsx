@@ -32,7 +32,7 @@ export function LoginForm() {
       const result = await signIn("credentials", {
         email: data.email,
         password: data.password,
-        redirect: false,
+        callbackUrl: "/admin",
       });
 
       if (result?.error) {
@@ -40,10 +40,9 @@ export function LoginForm() {
         return;
       }
 
-      // Login exitoso
+      // Si redirect: false no está seteado, NextAuth maneja el redirect automáticamente
+      // y la sesión se actualiza correctamente
       toast.success("¡Bienvenido! Iniciando sesión...");
-      router.push("/admin");
-      router.refresh();
     } catch (error) {
       toast.error("Error al iniciar sesión. Intenta nuevamente.");
     }
