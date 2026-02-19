@@ -22,7 +22,7 @@ export interface BlogCategory {
   id: string;
   name: string;
   slug: string;
-  color: "red" | "blue" | "green" | "yellow";
+  color: "red" | "blue" | "green" | "yellow" | "purple";
   description: string;
 }
 
