@@ -30,9 +30,7 @@ export const blogPostSchema = z.object({
     "Derecho Disciplinario",
     "Investigación Privada",
     "Noticias",
-  ], {
-    errorMap: () => ({ message: "Selecciona una categoría válida" })
-  }),
+  ]),
   featured: z.boolean().default(false),
   meta_title: z
     .string()

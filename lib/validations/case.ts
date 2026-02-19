@@ -23,27 +23,20 @@ export const createCaseSchema = z.object({
     .regex(/^[0-9+\-\s()]*$/, "Formato de teléfono inválido")
     .optional()
     .or(z.literal("")),
-  case_type: z.enum(
-    [
-      "penal",
-      "laboral",
-      "comercial",
-      "disciplinario",
-      "investigacion",
-      "consultoria",
-    ],
-    {
-      errorMap: () => ({ message: "Selecciona un tipo de caso válido" }),
-    }
-  ),
+  case_type: z.enum([
+    "penal",
+    "laboral",
+    "comercial",
+    "disciplinario",
+    "investigacion",
+    "consultoria",
+  ]),
   description: z
     .string()
     .min(1, "La descripción es requerida")
     .min(20, "La descripción debe tener al menos 20 caracteres")
     .max(2000, "La descripción no puede exceder 2000 caracteres"),
-  priority: z.enum(["baja", "media", "alta", "urgente"], {
-    errorMap: () => ({ message: "Selecciona una prioridad válida" }),
-  }),
+  priority: z.enum(["baja", "media", "alta", "urgente"]),
   deadline: z.string().optional().or(z.literal("")),
 });
 
