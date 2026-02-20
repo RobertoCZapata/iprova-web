@@ -20,7 +20,7 @@ export function Footer() {
             <div className="flex items-center mb-6">
               <div className="relative w-40 h-40 flex items-center justify-center">
                 <Image
-                  src="/icons/logo-iprova.svg"
+                  src="/icons/logo-iprova-safe.svg"
                   alt="iPROVA - Abogados e Investigadores"
                   width={160}
                   height={160}

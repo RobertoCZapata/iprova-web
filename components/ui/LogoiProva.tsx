@@ -10,7 +10,7 @@ interface LogoiProvaProps extends Omit<ComponentProps<typeof Image>, "src" | "al
 export function LogoiProva({ width = 160, height = 50, className, ...props }: LogoiProvaProps) {
   return (
     <Image
-      src="/icons/logo-iprova.svg"
+      src="/icons/logo-iprova-safe.svg"
       alt="iPROVA - Abogados e Investigadores"
       width={width}
       height={height}
