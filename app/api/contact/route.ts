@@ -2,7 +2,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { ContactEmailTemplate } from '@/emails/ContactEmail';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Lazy initialization para evitar errores durante el build
+function getResendClient() {
+  if (!process.env.RESEND_API_KEY) {
+    throw new Error('RESEND_API_KEY is not configured');
+  }
+  return new Resend(process.env.RESEND_API_KEY);
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -27,6 +33,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Enviar email usando Resend
+    const resend = getResendClient();
     const { data, error } = await resend.emails.send({
       from: process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev',
       to: process.env.RESEND_TO_EMAIL || 'contacto@iprova.com.co',
