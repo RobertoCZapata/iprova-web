@@ -29,11 +29,11 @@ export function LoginForm() {
 
   const onSubmit = async (data: LoginFormData) => {
     try {
-      const result = await signIn("credentials", {
+      const result = (await signIn("credentials", {
         email: data.email,
         password: data.password,
         redirect: false,
-      });
+      })) as { error?: string; ok: boolean; status: number; url?: string | null } | undefined;
 
       if (result?.error) {
         toast.error("Email o contraseña incorrectos");
