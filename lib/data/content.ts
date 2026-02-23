@@ -3,33 +3,64 @@
  * Contenido de las diferentes secciones del sitio
  */
 
-// Hero Section Content
+// Hero Section Content - Interactive Route Selector
 export const heroContent = {
-  // Título H1 - Promesa realista y profesional
-  title: {
-    main: "No solo te defendemos:",
-    highlight: "investigamos con rigor",
-  },
-  // Subtítulo H2
-  tagline: "Abogados e investigadores, en un solo equipo",
-  // Liderazgo - Firma
-  leadership: "liderado por ZAPATA & PEDRAZA",
-  // Descripción detallada del servicio
-  description:
-    "No necesitas coordinar defensa jurídica e investigación por separado. En iPROVA integramos litigación penal y disciplinaria con investigación privada profesional: verificación de información, entrevistas, análisis documental y digital, gestión y trazabilidad de evidencia y, cuando aporta valor, apoyo pericial. Así construimos una estrategia clara, con decisiones informadas en cada etapa del proceso.",
-  // Frase destacada - Propuesta de valor
-  benefit:
-    "Más que promesas: método, evidencia y estrategia.",
-  cta: {
-    primary: {
-      label: "Solicitar Evaluación de Caso",
-      href: "#contacto",
+  // Titular principal (compatible con ambos públicos)
+  title: "Ocupamos su caso como una investigación: estrategia, evidencia y decisión.",
+  // Subtitular (explica la doble área)
+  subtitle: "iPROVA integra defensa penal y sancionatoria con investigación privada, y asesoría comercial estratégica para empresas y directivos.",
+
+  // Rutas de servicio
+  routes: {
+    penal: {
+      id: "penal",
+      title: "Penal y sancionatorio",
+      description: "Defensa + investigación + litigio estratégico.",
+      bullets: [
+        "Teoría del caso basada en evidencia verificable y trazable.",
+        "Preparación de audiencias, recursos e impugnaciones con método.",
+        "Investigación privada: entrevistas, análisis documental y digital.",
+      ],
+      cta: {
+        primary: {
+          label: "Evaluar mi caso (confidencial)",
+          href: "#contacto",
+        },
+        secondary: {
+          label: "Ver método de trabajo",
+          href: "#servicios",
+        },
+      },
     },
-    secondary: {
-      label: "Ver Nuestros Servicios",
-      href: "#servicios",
+    comercial: {
+      id: "comercial",
+      title: "Comercial y estratégico",
+      description: "Contratos + riesgos + decisiones corporativas.",
+      bullets: [
+        "Diagnóstico de riesgos y soporte jurídico para decisiones de gerencia.",
+        "Contratos, cumplimiento y gestión preventiva del conflicto.",
+        "Estrategia para crisis y contingencias: respuesta rápida y documentada.",
+      ],
+      cta: {
+        primary: {
+          label: "Agendar diagnóstico empresarial",
+          href: "#contacto",
+        },
+        secondary: {
+          label: "Ver líneas de asesoría",
+          href: "#servicios",
+        },
+      },
     },
   },
+
+  // Franja de confianza
+  trustBadges: [
+    "Atención confidencial",
+    "Cobertura nacional",
+    "Equipo legal + investigación",
+    "Enfoque en evidencia",
+  ],
 } as const;
 
 // About Us Section Content - Nuestra Propuesta
