@@ -10,19 +10,12 @@ export interface TeamMember {
   focus: string;
   image: string;
   isFounding: boolean;
+  isStrategicAlly?: boolean;
   linkedIn?: string;
 }
 
 export const teamMembers: TeamMember[] = [
   // Socios Fundadores
-  {
-    name: "Henry ZAPATA REYES",
-    title: "Socio fundador | Penal y disciplinario | Contrainterrogatorio",
-    focus: "Teoría del caso y defensa sancionatoria",
-    image: "/images/team/henry-zapata.jpg",
-    isFounding: true,
-    linkedIn: "",
-  },
   {
     name: "Javier PEDRAZA",
     title: "Socio fundador | Penal | Investigación privada",
@@ -31,13 +24,23 @@ export const teamMembers: TeamMember[] = [
     isFounding: true,
     linkedIn: "",
   },
-  // Equipo / Asociados
+  // Aliados Estratégicos
+  {
+    name: "Henry ZAPATA REYES",
+    title: "Aliado Estratégico | Penal, Disciplinario y Contrainterrogatorio",
+    focus: "Teoría del caso y defensa sancionatoria",
+    image: "/images/team/henry-zapata.jpg",
+    isFounding: false,
+    isStrategicAlly: true,
+    linkedIn: "",
+  },
+  // Socios Fundadores
   {
     name: "Hernán Darío ZAPATA VILLAR",
-    title: "Asociado | Comercial y laboral",
+    title: "Socio fundador | Comercial y laboral",
     focus: "Contratos, laboral e insolvencia",
     image: "/images/team/hernan-dario.jpg",
-    isFounding: false,
+    isFounding: true,
     linkedIn: "",
   },
 ];
@@ -47,4 +50,11 @@ export const teamSectionContent = {
   title: "Nuestro Equipo",
   description:
     "Un equipo integrado de abogados e investigadores, con método, técnica y rigor probatorio.",
+} as const;
+
+// Strategic Allies Content
+export const strategicAlliesContent = {
+  title: "Aliados Estratégicos",
+  description:
+    "iPROVA cuenta con alianzas estratégicas con profesionales de alto nivel que nos brindan servicios dedicados y exclusivos en áreas especializadas del derecho. Estos aliados trabajan en coordinación estrecha con nuestro equipo, garantizando la excelencia en cada caso.",
 } as const;

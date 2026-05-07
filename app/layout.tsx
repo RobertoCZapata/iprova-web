@@ -145,15 +145,17 @@ export default function RootLayout({
     founders: [
       {
         "@type": "Person",
-        name: "Henry Zapata Reyes",
-        jobTitle: "Socio Fundador - Abogado Penalista",
-        description: "Especialista en teoría del caso, defensa sancionatoria y contrainterrogatorio",
-      },
-      {
-        "@type": "Person",
         name: "Javier Pedraza",
         jobTitle: "Socio Fundador - Investigador Privado",
         description: "Especialista en investigación privada y evidencia",
+      },
+    ],
+    employees: [
+      {
+        "@type": "Person",
+        name: "Henry Zapata Reyes",
+        jobTitle: "Aliado Estratégico - Abogado Penalista",
+        description: "Especialista en teoría del caso, defensa sancionatoria y contrainterrogatorio",
       },
     ],
     serviceType: [

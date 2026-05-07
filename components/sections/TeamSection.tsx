@@ -1,10 +1,11 @@
 import Image from "next/image";
 import { Linkedin } from "lucide-react";
-import { teamMembers, teamSectionContent } from "@/lib/data";
+import { teamMembers, teamSectionContent, strategicAlliesContent } from "@/lib/data";
 
 export function TeamSection() {
-  const foundingMembers = teamMembers.filter((m) => m.isFounding);
-  const associates = teamMembers.filter((m) => !m.isFounding);
+  const foundingMembers = teamMembers.filter((m) => m.isFounding && !m.isStrategicAlly);
+  const strategicAllies = teamMembers.filter((m) => m.isStrategicAlly);
+  const associates = teamMembers.filter((m) => !m.isFounding && !m.isStrategicAlly);
 
   return (
     <section className="py-24 bg-white" id="equipo">
@@ -79,6 +80,54 @@ export function TeamSection() {
                       )}
                     </div>
                   </div>
+                </article>
+              ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Aliados Estratégicos */}
+        {strategicAllies.length > 0 && (
+          <div className="mb-16">
+            <h3 className="text-2xl font-bold text-primary text-center mb-8">
+              {strategicAlliesContent.title}
+            </h3>
+            <p className="text-center text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed">
+              {strategicAlliesContent.description}
+            </p>
+            <div className="flex justify-center">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(320px,384px))] gap-8 max-w-6xl justify-items-center auto-rows-fr">
+              {strategicAllies.map((member) => (
+                <article
+                  key={member.name}
+                  className="group bg-gray-50 border border-gray-200 rounded-lg overflow-hidden hover:shadow-xl hover:border-primary/30 transition-all duration-300 p-8 w-full max-w-sm"
+                >
+                  <h4 className="text-2xl font-bold text-primary mb-3">
+                    {member.name}
+                  </h4>
+                  <p className="text-base text-gray-600 mb-4 leading-relaxed">
+                    {member.title}
+                  </p>
+                  <div className="mb-4">
+                    <span className="text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                      Enfoque
+                    </span>
+                    <p className="text-sm text-gray-700 mt-2">
+                      {member.focus}
+                    </p>
+                  </div>
+                  {member.linkedIn && (
+                    <a
+                      href={member.linkedIn}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-primary hover:underline text-sm font-semibold mt-4"
+                    >
+                      <Linkedin size={18} />
+                      Ver perfil
+                    </a>
+                  )}
                 </article>
               ))}
               </div>
